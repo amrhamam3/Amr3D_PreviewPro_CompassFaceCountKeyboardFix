@@ -1,0 +1,48 @@
+diff --git a/app/src/main/res/values-en/strings.xml b/app/src/main/res/values-en/strings.xml
+index 7817681..a0e9b83 100644
+--- a/app/src/main/res/values-en/strings.xml
++++ b/app/src/main/res/values-en/strings.xml
+@@ -19,7 +19,6 @@
+     <string name="nav_settings">Settings</string>
+     <string name="settings_title">⚙️  Settings</string>
+     <string name="settings_user">👤  User</string>
+-    <string name="settings_change_name">✏️  Change Name</string>
+     <string name="settings_theme_color">🎨  App Color</string>
+     <string name="settings_unit">📏  Measurement Unit</string>
+     <string name="settings_quality">🎮  Render Quality</string>
+diff --git a/app/src/main/res/values-es/strings.xml b/app/src/main/res/values-es/strings.xml
+index 98fe235..947ffbf 100644
+--- a/app/src/main/res/values-es/strings.xml
++++ b/app/src/main/res/values-es/strings.xml
+@@ -19,7 +19,6 @@
+     <string name="nav_settings">Ajustes</string>
+     <string name="settings_title">⚙️  Ajustes</string>
+     <string name="settings_user">👤  Usuario</string>
+-    <string name="settings_change_name">✏️  Cambiar nombre</string>
+     <string name="settings_theme_color">🎨  Color de la app</string>
+     <string name="settings_unit">📏  Unidad de medida</string>
+     <string name="settings_quality">🎮  Calidad de render</string>
+diff --git a/app/src/main/res/values-fr/strings.xml b/app/src/main/res/values-fr/strings.xml
+index 6079608..b9eca7c 100644
+--- a/app/src/main/res/values-fr/strings.xml
++++ b/app/src/main/res/values-fr/strings.xml
+@@ -19,7 +19,6 @@
+     <string name="nav_settings">Paramètres</string>
+     <string name="settings_title">⚙️  Paramètres</string>
+     <string name="settings_user">👤  Utilisateur</string>
+-    <string name="settings_change_name">✏️  Changer le nom</string>
+     <string name="settings_theme_color">🎨  Couleur de l\'app</string>
+     <string name="settings_unit">📏  Unité de mesure</string>
+     <string name="settings_quality">🎮  Qualité de rendu</string>
+diff --git a/app/src/main/res/values/strings.xml b/app/src/main/res/values/strings.xml
+index 838a116..adad876 100644
+--- a/app/src/main/res/values/strings.xml
++++ b/app/src/main/res/values/strings.xml
+@@ -19,7 +19,6 @@
+     <string name="nav_settings">الإعدادات</string>
+     <string name="settings_title">⚙️  الإعدادات</string>
+     <string name="settings_user">👤  المستخدم</string>
+-    <string name="settings_change_name">✏️  تغيير الاسم</string>
+     <string name="settings_theme_color">🎨  لون التطبيق</string>
+     <string name="settings_unit">📏  وحدة القياس</string>
+     <string name="settings_quality">🎮  جودة العرض</string>
