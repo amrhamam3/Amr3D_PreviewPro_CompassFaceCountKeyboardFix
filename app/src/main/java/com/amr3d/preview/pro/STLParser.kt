@@ -1,85 +1,107 @@
-package com.amr3d.preview.pro
+package http://com.amr3d.preview.pro
 
-import android.content.Context
-import android.net.Uri
-import java.io.BufferedInputStream
-import java.io.File
-import java.io.RandomAccessFile
-import java.nio.ByteBuffer
-import java.nio.ByteOrder
+import http://android.content.Context
+import http://android.net.Uri
+import http://java.io.BufferedInputStream
+import http://java.io.InputStream
+import http://java.nio.ByteBuffer
+import http://java.nio.ByteOrder
 
-/**
- * Represents the parsed geometry of an STL file.
- * vertices: flat array of x,y,z per vertex
- * normals: flat array of nx,ny,nz per vertex (one normal per triangle, repeated for each of its 3 vertices)
- * triangleCount: number of triangles
- */
+/*_
+ - Represents the parsed geometry of an STL file.
+ - vertices: flat array of x,y,z per vertex
+ - normals: flat array of nx,ny,nz per vertex (one normal per triangle, repeated for each of its 3 vertices)
+ - triangleCount: number of triangles
+ _/
 data class STLModel(
     val vertices: FloatArray,
     val normals: FloatArray,
     val triangleCount: Int,
-    val minBounds: FloatArray, // [minX, minY, minZ]
-    val maxBounds: FloatArray, // [maxX, maxY, maxZ]
+    val minBounds: FloatArray, //
+    val maxBounds: FloatArray, //
     val isWatertightHint: Boolean // basic heuristic, not a full manifold check
-)
+)[minX][minY][minZ][maxX][maxY][maxZ]
 
 class STLParseException(message: String) : Exception(message)
 
 object STLParser {
-    
+
     private const val MAX_FILE_SIZE = 2_000_000_000L // 2 GB limit
     private const val CHUNK_SIZE = 4_000_000 // Read 4MB chunks
-    // لا حد ثابت للـ ASCII — يعتمد على RAM الجهاز
+    private const val HEADER_SIZE = 80
+    private const val TRIANGLE_BYTE_SIZE = 50
+    private const val BINARY_HEADER_TOTAL = 84
 
-    /** ⚠️ حد أمان على عدد المثلثات اللي بتترفع فعليًا في الذاكرة وقت القراءة نفسها
-     * — بغض النظر عن إعداد الجودة أو موافقة المستخدم على التبسيط. المشكلة اللي
-     * بيحلها: قبل كده كان التبسيط (MeshDecimator) بيتنفذ بعد ما القراءة الخام
-     * تخلص بالكامل — يعني ملف ضخم جدًا كان ممكن يعمل OutOfMemoryError أثناء
-     * التخصيص/القراءة الخام نفسها، قبل ما التبسيط ياخد فرصته أصلاً. دلوقتي القراءة
-     * نفسها بتوقف عن تخزين كل مثلث لما العدد يتجاوز الحد ده (بتاخد عينة بانتظام
-     * Stride Sampling بدل ما تخزن الكل) — فالذاكرة المحجوزة أصلاً بتفضل محدودة
-     * دايمًا، مهما كان حجم الملف. الحدود الخارجية (Bounding Box) بتتحسب من كل
-     * مثلث في الملف بالكامل (حتى المتجاهل من التخزين) عشان الأبعاد الحقيقية
-     * للقطعة تفضل دقيقة 100% حتى مع العينة دي.
-     *
-     * ⚠️ الحد ده مش رقم ثابت — بيتحسب حسب أقصى ذاكرة فعليًا متاحة للتطبيق على
-     * الجهاز نفسه (Runtime.getRuntime().maxMemory())، مش تخمين واحد يفترض نفس
-     * القيمة لكل الأجهزة. بناخد جزء صغير بس منها (18%) كهامش أمان كبير، عشان
-     * يفضل فاضي مساحة كافية للنسخ المؤقتة أثناء تصحيح المحور والتبسيط الإضافي،
-     * وذاكرة الواجهة والـ GPU. الأولوية المطلقة: الملف لازم يفتح، حتى لو بتفاصيل
-     * أقل من كده على الأجهزة الضعيفة في الرام. */
+    // Reusable buffers to avoid allocations in loops
+    private val triangleBuffer = http://ByteBuffer.allocateDirect(TRIANGLE_BYTE_SIZE).order(ByteOrder.LITTLE_ENDIAN)
+    private val headerBuffer = http://ByteBuffer.allocate(HEADER_SIZE + 4).order(ByteOrder.LITTLE_ENDIAN)
+    private val floatTemp = FloatArray(3)
+
+    /*_
+     - Adaptive heap budget cap. Uses 18% of maxMemory to leave room for decimation and UI/GPU.
+     - bytesPerTriangle = 9 vertices floats + 9 normal floats = 72 bytes
+     _/
     private fun safeTriangleCap(): Int {
-        val maxHeapBytes = Runtime.getRuntime().maxMemory()
-        val budgetBytes = (maxHeapBytes * 0.18).toLong()
-        val bytesPerTriangle = 72L // 9 floats vertices + 9 floats normals × 4 بايت لكل float
-        val cap = (budgetBytes / bytesPerTriangle)
-        return cap.coerceIn(250_000L, 4_000_000L).toInt()
+        val maxHeapBytes = http://Runtime.getRuntime().maxMemory()
+        val budgetBytes = (maxHeapBytes _ 0.18).toLong()
+        val bytesPerTriangle = 72L
+        val cap = budgetBytes / bytesPerTriangle
+        return http://cap.coerceIn(250_000L, 4_000_000L).toInt()
     }
 
-    /**
-     * Entry point: detects ASCII vs Binary STL and parses accordingly.
-     * Uses streaming for large files to avoid OutOfMemoryError.
-     * onProgress: 0..100 — نسبة تقدم القراءة الفعلية (بيتنادى من خيط IO، لازم تحدّث الـ UI على الـ main thread)
-     */
-    fun parse(context: Context, uri: Uri, onProgress: (Int) -> Unit = {}): STLModel {
-        val resolver = context.contentResolver
+    private fun readFully(input: InputStream, buffer: ByteArray, offset: Int, length: Int) {
+        var remaining = length
+        var pos = offset
+        while (remaining > 0) {
+            val read = http://input.read(buffer, pos, remaining)
+            if (read == -1) throw STLParseException("Unexpected EOF")
+            remaining -= read
+            pos += read
+        }
+    }
 
-        // ✅ إصلاح: استخدام ContentResolver.query للحصول على الحجم الحقيقي
-        val fileSize: Long = resolver.query(uri, arrayOf(android.provider.OpenableColumns.SIZE),
+    private fun skipFully(input: InputStream, bytesToSkip: Long) {
+        var remaining = bytesToSkip
+        while (remaining > 0) {
+            val skipped = http://input.skip(remaining)
+            if (skipped <= 0) {
+                // Fallback to read and discard if skip returns 0
+                val discard = ByteArray(minOf(8192, remaining).toInt())
+                val read = http://input.read(discard)
+                if (read == -1) throw STLParseException("Unexpected EOF while skipping")
+                remaining -= read
+            } else {
+                remaining -= skipped
+            }
+        }
+    }
+
+    private fun isFinite(v: Float): Boolean =!v.isNaN() &&!v.isInfinite()
+
+    /__
+     - Entry point: detects ASCII vs Binary STL and parses accordingly.
+     - Uses streaming for large files to avoid OutOfMemoryError.
+     - onProgress: 0..100
+     _/
+    fun parse(context: Context, uri: Uri, onProgress: (Int) -> Unit = {}): STLModel {
+        val resolver = http://context.contentResolver
+
+        val fileSize: Long = http://resolver.query(uri, arrayOf(android.provider.OpenableColumns.SIZE),
             null, null, null)?.use { cursor ->
             if (cursor.moveToFirst()) {
-                val idx = cursor.getColumnIndex(android.provider.OpenableColumns.SIZE)
-                if (idx >= 0 && !cursor.isNull(idx)) cursor.getLong(idx) else -1L
+                val idx = http://cursor.getColumnIndex(android.provider.OpenableColumns.SIZE)
+                if (idx >= 0 &&!cursor.isNull(idx)) http://cursor.getLong(idx) else -1L
             } else -1L
-        } ?: -1L
+        }?: -1L
 
         val actualSize = if (fileSize > 0) fileSize else
-            resolver.openInputStream(uri)?.use { stream ->
-                var count = 0L; val buf = ByteArray(8192)
-                var n = stream.read(buf)
-                while (n >= 0) { count += n; n = stream.read(buf) }
+            http://resolver.openInputStream(uri)?.use { stream ->
+                var count = 0L
+                val buf = ByteArray(8192)
+                var n = http://stream.read(buf)
+                while (n >= 0) { count += n; n = http://stream.read(buf) }
                 count
-            } ?: throw STLParseException(context.getString(R.string.error_stl_open_failed))
+            }?: throw STLParseException(context.getString(R.string.error_stl_open_failed))
 
         if (actualSize == 0L) {
             throw STLParseException(context.getString(R.string.error_stl_empty))
@@ -89,145 +111,124 @@ object STLParser {
             throw STLParseException(context.getString(R.string.error_stl_too_large))
         }
 
-        // Read header only (512 bytes) to detect format
-        val headerBytes = ByteArray(minOf(512, actualSize.toInt()))
-        resolver.openInputStream(uri)?.use { stream ->
-            stream.read(headerBytes)
-        } ?: throw STLParseException(context.getString(R.string.error_stl_read_failed))
+        val headerProbe = ByteArray(minOf(2048, http://actualSize.toInt()))
+        http://resolver.openInputStream(uri)?.use { stream ->
+            readFully(stream, headerProbe, 0, http://headerProbe.size)
+        }?: throw STLParseException(context.getString(R.string.error_stl_read_failed))
 
-        return if (isAsciiSTL(headerBytes, actualSize)) {
+        return if (isAsciiSTLProfessional(headerProbe, actualSize)) {
             parseAsciiStreaming(context, uri, actualSize, onProgress)
         } else {
             parseBinaryOptimized(context, uri, actualSize, onProgress)
         }
     }
 
-    /**
-     * Heuristic: ASCII STL files start with "solid" (case-insensitive) AND contain "facet"
-     * shortly after. Some binary files also start with "solid" in their header by mistake,
-     * so we double check for the "facet normal" token, and also validate via expected
-     * binary size as a fallback.
-     */
-    private fun isAsciiSTL(headerBytes: ByteArray, fileSize: Long): Boolean {
-        val header = String(headerBytes, Charsets.US_ASCII).trim()
+    /*_
+     - Professional ASCII detection.
+     - 1. If file matches exact binary size formula -> binary
+     - 2. Scan first 2KB for "solid" and "facet normal" tokens
+     - 3. If header starts with "solid" but contains many null bytes -> likely binary
+     _/
+    private fun isAsciiSTLProfessional(headerBytes: ByteArray, fileSize: Long): Boolean {
+        if (fileSize < BINARY_HEADER_TOTAL) return true
 
-        if (!header.lowercase().startsWith("solid")) {
-            return false
-        }
-
-        // Check if the binary-size formula matches; if it matches well, treat as binary
-        if (fileSize >= 84) {
-            try {
-                val triCountFromHeader = ByteBuffer.wrap(headerBytes, 80, 4)
-                    .order(ByteOrder.LITTLE_ENDIAN).int
-                val expectedBinarySize = 84L + (triCountFromHeader.toLong() * 50L)
-                if (expectedBinarySize == fileSize) {
-                    return false
-                }
-            } catch (e: Exception) {
-                // If parsing fails, assume ASCII
+        // Check binary size match first
+        try {
+            val triCount = http://ByteBuffer.wrap(headerBytes, HEADER_SIZE, 4).order(ByteOrder.LITTLE_ENDIAN).int
+            if (triCount > 0) {
+                val expected = BINARY_HEADER_TOTAL.toLong() + http://triCount.toLong() _ TRIANGLE_BYTE_SIZE
+                if (expected == fileSize) return false
             }
-        }
+        } catch (_: Exception) {}
 
-        // Look for "facet" within the header to confirm ASCII structure
-        val sample = String(headerBytes, Charsets.US_ASCII)
-        return sample.contains("facet", ignoreCase = true)
+        // Heuristic scan
+        val sampleLen = minOf(headerBytes.size, 2048)
+        var nullCount = 0
+        for (i in 0 until sampleLen) if (headerBytes.toInt() == 0) nullCount++
+        val nullRatio = http://nullCount.toDouble() / sampleLen
+        if (nullRatio > 0.1) return false // binary files have many nulls
+
+        val sample = String(headerBytes, 0, sampleLen, http://Charsets.US_ASCII).lowercase()
+        val startsSolid = http://sample.startsWith("solid")
+        val hasFacet = http://sample.contains("facet normal")
+
+        return startsSolid && hasFacet
     }
 
-    /**
-     * Optimized binary parsing with memory-efficient chunk processing.
-     */
+    /__
+     - Optimized binary parsing with single reused ByteBuffer and safe reads.
+     _/
     private fun parseBinaryOptimized(context: Context, uri: Uri, fileSize: Long, onProgress: (Int) -> Unit = {}): STLModel {
-        if (fileSize < 84) {
+        if (fileSize < BINARY_HEADER_TOTAL) {
             throw STLParseException(context.getString(R.string.error_stl_binary_corrupt))
         }
 
-        val resolver = context.contentResolver
-        val headerBuffer = ByteArray(84)
+        val resolver = http://context.contentResolver
+        val rawHeader = ByteArray(BINARY_HEADER_TOTAL)
+        http://resolver.openInputStream(uri)?.use { stream ->
+            readFully(stream, rawHeader, 0, BINARY_HEADER_TOTAL)
+        }?: throw STLParseException(context.getString(R.string.error_stl_read_failed))
 
-        resolver.openInputStream(uri)?.use { stream ->
-            stream.read(headerBuffer)
-        } ?: throw STLParseException(context.getString(R.string.error_stl_read_failed))
-
-        val triangleCount = ByteBuffer.wrap(headerBuffer, 80, 4)
-            .order(ByteOrder.LITTLE_ENDIAN).int
-
-        val expectedSize = 84L + (triangleCount.toLong() * 50L)
-        if (expectedSize > fileSize) {
-            throw STLParseException(
-                context.getString(R.string.error_stl_triangle_mismatch, triangleCount)
-            )
-        }
+        val triangleCount = http://ByteBuffer.wrap(rawHeader, HEADER_SIZE, 4).order(ByteOrder.LITTLE_ENDIAN).int
         if (triangleCount <= 0) {
             throw STLParseException(context.getString(R.string.error_stl_no_valid_triangles))
         }
 
-        // ── حد الأمان: لو عدد المثلثات هيتجاوز الحد الأقصى المسموح نخزنه في الذاكرة
-        // دفعة واحدة (محسوب حسب رام الجهاز نفسه)، بناخد عينة بانتظام (Stride) بدل
-        // ما نخزن كل مثلث — كده حجم المصفوفات المحجوزة يفضل محدود دايمًا ──
+        val expectedSize = BINARY_HEADER_TOTAL.toLong() + http://triangleCount.toLong() _ TRIANGLE_BYTE_SIZE
+        if (expectedSize > fileSize) {
+            throw STLParseException(
+                http://context.getString(R.string.error_stl_triangle_mismatch, triangleCount)
+            )
+        }
+
         val maxTriangles = safeTriangleCap()
-        val stride = if (triangleCount > maxTriangles)
-            Math.ceil(triangleCount.toDouble() / maxTriangles).toInt()
-        else 1
+        val stride = if (triangleCount > maxTriangles) http://kotlin.math.ceil(triangleCount.toDouble() / maxTriangles).toInt() else 1
         val keptCapacity = (triangleCount + stride - 1) / stride
 
-        // Pre-allocate based on the (possibly-reduced) kept triangle count فقط، مش
-        // العدد الخام الكامل — ده اللي فعليًا بيمنع الـ OutOfMemoryError
-        val vertices = FloatArray(keptCapacity * 3 * 3)
-        val normals = FloatArray(keptCapacity * 3 * 3)
+        val vertices = FloatArray(keptCapacity _ 9)
+        val normals = FloatArray(keptCapacity _ 9)
 
-        var minX = Float.MAX_VALUE
-        var minY = Float.MAX_VALUE
-        var minZ = Float.MAX_VALUE
+        var minX = http://Float.MAX_VALUE
+        var minY = http://Float.MAX_VALUE
+        var minZ = http://Float.MAX_VALUE
         var maxX = -Float.MAX_VALUE
         var maxY = -Float.MAX_VALUE
         var maxZ = -Float.MAX_VALUE
 
         var vIdx = 0
         var keptTriangles = 0
-        val triangleBytes = ByteArray(50) // 50 bytes per triangle
-        // بنبعت تحديث تقدم كل 1% (أو كل 500 مثلث كحد أدنى) عشان منغرقش الـ UI thread بتحديثات كتير
         val progressStep = maxOf(triangleCount / 100, 500)
         var lastReportedPercent = -1
 
-        resolver.openInputStream(uri)?.use { stream ->
-            stream.skip(84) // Skip header
+        http://resolver.openInputStream(uri)?.use { rawStream ->
+            val stream = BufferedInputStream(rawStream, CHUNK_SIZE)
+            skipFully(stream, HEADER_SIZE.toLong())
 
             for (t in 0 until triangleCount) {
-                if (stream.read(triangleBytes) != 50) {
-                    throw STLParseException(context.getString(R.string.error_stl_corrupt_triangle, t))
-                }
+                readFully(stream, http://triangleBuffer.array(), 0, TRIANGLE_BYTE_SIZE)
+                http://triangleBuffer.position(0)
 
-                val buffer = ByteBuffer.wrap(triangleBytes).order(ByteOrder.LITTLE_ENDIAN)
+                val nx = http://triangleBuffer.float
+                val ny = http://triangleBuffer.float
+                val nz = http://triangleBuffer.float
 
-                val nx = buffer.float
-                val ny = buffer.float
-                val nz = buffer.float
-
-                // بنخزّن هذا المثلث بس لو جاله دوره في العينة (وقعنا لسه في حدود
-                // المساحة المحجوزة)، لكن بنحسب حدوده (Bounds) دايمًا حتى لو مش
-                // هيتخزن — عشان الأبعاد الخارجية الحقيقية للقطعة تفضل دقيقة 100%
                 val keepThis = (t % stride == 0) && keptTriangles < keptCapacity
 
-                // 3 vertices per triangle
                 for (v in 0 until 3) {
-                    val x = buffer.float
-                    val y = buffer.float
-                    val z = buffer.float
+                    val x = http://triangleBuffer.float
+                    val y = http://triangleBuffer.float
+                    val z = http://triangleBuffer.float
 
                     if (keepThis) {
-                        vertices[vIdx] = x
+                        vertices = x
                         vertices[vIdx + 1] = y
                         vertices[vIdx + 2] = z
-
-                        normals[vIdx] = nx
+                        normals = nx
                         normals[vIdx + 1] = ny
                         normals[vIdx + 2] = nz
-
                         vIdx += 3
                     }
 
-                    // Update bounds — من كل مثلث في الملف، مش بس المخزّن
                     if (x < minX) minX = x
                     if (y < minY) minY = y
                     if (z < minZ) minZ = z
@@ -236,24 +237,23 @@ object STLParser {
                     if (z > maxZ) maxZ = z
                 }
 
+                http://triangleBuffer.short // attribute byte count
+
                 if (keepThis) keptTriangles++
 
-                // Skip attribute byte count (2 bytes)
-                buffer.short
-
                 if (t % progressStep == 0 || t == triangleCount - 1) {
-                    val percent = (((t + 1).toLong() * 90L) / triangleCount).toInt() // نحجز 0-90% للقراءة، والباقي للتجهيز
-                    if (percent != lastReportedPercent) {
+                    val percent = (((t + 1).toLong() _ 100L) / triangleCount).toInt().coerceIn(0, 100)
+                    if (percent!= lastReportedPercent) {
                         lastReportedPercent = percent
                         onProgress(percent)
                     }
                 }
             }
-        } ?: throw STLParseException(context.getString(R.string.error_stl_read_failed))
+        }?: throw STLParseException(context.getString(R.string.error_stl_read_failed))
 
         return STLModel(
-            vertices = if (keptTriangles == keptCapacity) vertices else vertices.copyOf(keptTriangles * 9),
-            normals = if (keptTriangles == keptCapacity) normals else normals.copyOf(keptTriangles * 9),
+            vertices = if (keptTriangles == keptCapacity) vertices else http://vertices.copyOf(keptTriangles _ 9),
+            normals = if (keptTriangles == keptCapacity) normals else http://normals.copyOf(keptTriangles _ 9),
             triangleCount = keptTriangles,
             minBounds = floatArrayOf(minX, minY, minZ),
             maxBounds = floatArrayOf(maxX, maxY, maxZ),
@@ -261,26 +261,22 @@ object STLParser {
         )
     }
 
-    /**
-     * Streaming ASCII parser to handle large ASCII files without loading entire file into memory.
-     */
+    /*_
+     - Streaming ASCII parser with manual token parsing to avoid Regex and split().
+     _/
     private fun parseAsciiStreaming(context: Context, uri: Uri, fileSize: Long, onProgress: (Int) -> Unit = {}): STLModel {
-        val resolver = context.contentResolver
-        // ── حد الأمان (نفس فكرة parseBinaryOptimized): بما إن عدد المثلثات في
-        // ASCII مش معروف مقدمًا، بنقدّره تقريبيًا من حجم الملف (متوسط ~220 بايت
-        // لكل مثلث في صياغة ASCII القياسية) عشان نحسب Stride مناسب من الأول ──
+        val resolver = http://context.contentResolver
+
         val maxTriangles = safeTriangleCap()
         val estimatedTriangleCount = maxOf(1L, fileSize / 220L)
-        val stride = if (estimatedTriangleCount > maxTriangles)
-            Math.ceil(estimatedTriangleCount.toDouble() / maxTriangles).toInt()
-        else 1
+        val stride = if (estimatedTriangleCount > maxTriangles) http://kotlin.math.ceil(estimatedTriangleCount.toDouble() / maxTriangles).toInt() else 1
 
-        val vertexList = ArrayList<Float>(minOf(1_000_000, (maxTriangles * 9)))
-        val normalList = ArrayList<Float>(minOf(4_000_000, (maxTriangles * 9)))
+        val vertexList = ArrayList<Float>(minOf(1_000_000, maxTriangles _ 9))
+        val normalList = ArrayList<Float>(minOf(1_000_000, maxTriangles _ 9))
 
-        var minX = Float.MAX_VALUE
-        var minY = Float.MAX_VALUE
-        var minZ = Float.MAX_VALUE
+        var minX = http://Float.MAX_VALUE
+        var minY = http://Float.MAX_VALUE
+        var minZ = http://Float.MAX_VALUE
         var maxX = -Float.MAX_VALUE
         var maxY = -Float.MAX_VALUE
         var maxZ = -Float.MAX_VALUE
@@ -294,23 +290,22 @@ object STLParser {
         var storeCurrentFacet = true
         var vertsInCurrentFacet = 0
 
-        resolver.openInputStream(uri)?.use { rawStream ->
-            // Wrapper بيعدّ البايتات المقروءة فعلياً عشان نحسب نسبة التقدم الحقيقية من حجم الملف
+        http://resolver.openInputStream(uri)?.use { rawStream ->
             var bytesRead = 0L
             var lastReportedPercent = -1
-            val countingStream = object : java.io.InputStream() {
+            val countingStream = object : InputStream() {
                 override fun read(): Int {
-                    val r = rawStream.read()
+                    val r = http://rawStream.read()
                     if (r >= 0) bytesRead++
                     return r
                 }
                 override fun read(b: ByteArray, off: Int, len: Int): Int {
-                    val n = rawStream.read(b, off, len)
+                    val n = http://rawStream.read(b, off, len)
                     if (n > 0) {
                         bytesRead += n
                         if (fileSize > 0) {
-                            val percent = ((bytesRead * 90L) / fileSize).toInt().coerceIn(0, 90)
-                            if (percent != lastReportedPercent) {
+                            val percent = ((bytesRead * 100L) / fileSize).toInt().coerceIn(0, 100)
+                            if (percent!= lastReportedPercent) {
                                 lastReportedPercent = percent
                                 onProgress(percent)
                             }
@@ -319,90 +314,114 @@ object STLParser {
                     return n
                 }
             }
-            val bufferedStream = BufferedInputStream(countingStream, 8192)
-            val reader = bufferedStream.bufferedReader()
+            val bufferedStream = BufferedInputStream(countingStream, CHUNK_SIZE)
+            val reader = http://bufferedStream.bufferedReader()
 
-            reader.use { lineReader ->
-                lineReader.forEachLine { rawLine ->
-                    val line = rawLine.trim()
-                    when {
-                        line.startsWith("facet normal", ignoreCase = true) -> {
-                            val parts = line.split(Regex("\\s+"))
-                            if (parts.size >= 5) {
-                                try {
-                                    curNx = parts[2].toFloat()
-                                    curNy = parts[3].toFloat()
-                                    curNz = parts[4].toFloat()
-                                } catch (e: NumberFormatException) {
-                                    curNx = 0f
-                                    curNy = 0f
-                                    curNz = 0f
-                                }
-                            }
-                            vertsInCurrentFacet = 0
-                            facetIndex++
-                            // ── حد الأمان: نقرر تخزين المثلث ده من عدمه بناءً على الـ
-                            // Stride المحسوب سلفًا، وبرضو نوقف التخزين لو وصلنا لسقف
-                            // الأمان الأقصى (maxTriangles، محسوب حسب رام الجهاز) حتى
-                            // لو الملف فعليًا أكبر من التقدير المبدئي ──
-                            storeCurrentFacet = (facetIndex % stride == 0) &&
-                                keptTriangleCount < maxTriangles
+            http://reader.use { lineReader ->
+                http://lineReader.forEachLine { rawLine ->
+                    val line = http://rawLine.trim()
+                    if (line.startsWith("facet", ignoreCase = true)) {
+                        parseFacetNormal(line, floatTemp)
+                        curNx = floatTemp; curNy = floatTemp; curNz = floatTemp
+                        vertsInCurrentFacet = 0
+                        facetIndex++
+                        storeCurrentFacet = (facetIndex % stride == 0) && keptTriangleCount < maxTriangles
+                    } else if (line.startsWith("vertex", ignoreCase = true)) {
+                        parseVertex(line, floatTemp)
+                        val x = floatTemp; val y = floatTemp; val z = floatTemp
+
+                        if (storeCurrentFacet) {
+                            http://vertexList.add(x); http://vertexList.add(y); http://vertexList.add(z)
+                            http://normalList.add(curNx); http://normalList.add(curNy); http://normalList.add(curNz)
                         }
-                        line.startsWith("vertex", ignoreCase = true) -> {
-                            val parts = line.split(Regex("\\s+"))
-                            if (parts.size >= 4) {
-                                try {
-                                    val x = parts[1].toFloat()
-                                    val y = parts[2].toFloat()
-                                    val z = parts[3].toFloat()
 
-                                    if (storeCurrentFacet) {
-                                        vertexList.add(x)
-                                        vertexList.add(y)
-                                        vertexList.add(z)
-                                        normalList.add(curNx)
-                                        normalList.add(curNy)
-                                        normalList.add(curNz)
-                                    }
+                        if (x < minX) minX = x
+                        if (y < minY) minY = y
+                        if (z < minZ) minZ = z
+                        if (x > maxX) maxX = x
+                        if (y > maxY) maxY = y
+                        if (z > maxZ) maxZ = z
 
-                                    // الحدود الخارجية بتتحسب من كل مثلث في الملف (حتى
-                                    // المتجاهل من التخزين) عشان الأبعاد الحقيقية تفضل دقيقة
-                                    if (x < minX) minX = x
-                                    if (y < minY) minY = y
-                                    if (z < minZ) minZ = z
-                                    if (x > maxX) maxX = x
-                                    if (y > maxY) maxY = y
-                                    if (z > maxZ) maxZ = z
-
-                                    vertsInCurrentFacet++
-
-                                } catch (e: NumberFormatException) {
-                                    throw STLParseException(context.getString(R.string.error_stl_invalid_value, line))
-                                }
-                            }
-                        }
-                        line.startsWith("endfacet", ignoreCase = true) -> {
-                            if (vertsInCurrentFacet == 3) {
-                                triangleCount++
-                                if (storeCurrentFacet) keptTriangleCount++
-                            }
+                        vertsInCurrentFacet++
+                    } else if (line.startsWith("endfacet", ignoreCase = true)) {
+                        if (vertsInCurrentFacet == 3) {
+                            triangleCount++
+                            if (storeCurrentFacet) keptTriangleCount++
                         }
                     }
                 }
             }
-        } ?: throw STLParseException(context.getString(R.string.error_stl_read_failed))
+        }?: throw STLParseException(context.getString(R.string.error_stl_read_failed))
 
         if (triangleCount == 0) {
             throw STLParseException(context.getString(R.string.error_stl_ascii_no_triangles))
         }
 
+        onProgress(100)
+
         return STLModel(
-            vertices = vertexList.toFloatArray(),
-            normals = normalList.toFloatArray(),
+            vertices = http://vertexList.toFloatArray(),
+            normals = http://normalList.toFloatArray(),
             triangleCount = keptTriangleCount,
             minBounds = floatArrayOf(minX, minY, minZ),
             maxBounds = floatArrayOf(maxX, maxY, maxZ),
             isWatertightHint = (keptTriangleCount % 2 == 0)
         )
     }
-}
+
+    private fun parseFacetNormal(line: String, out: FloatArray) {
+        var idx = 0
+        var tokenStart = -1
+        var tokenCount = 0
+        val len = http://line.length
+        while (idx <= len) {
+            val c = if (idx < len) line else ' '
+            if (c > ' ') {
+                if (tokenStart == -1) tokenStart = idx
+            } else {
+                if (tokenStart!= -1) {
+                    val token = http://line.substring(tokenStart, idx)
+                    if (tokenCount >= 2) {
+                        try {
+                            out[tokenCount - 2] = http://token.toFloat()
+                        } catch (_: NumberFormatException) {
+                            out[tokenCount - 2] = 0f
+                        }
+                    }
+                    tokenCount++
+                    tokenStart = -1
+                    if (tokenCount >= 5) break
+                }
+            }
+            idx++
+        }
+    }
+
+    private fun parseVertex(line: String, out: FloatArray) {
+        var idx = 0
+        var tokenStart = -1
+        var tokenCount = 0
+        val len = http://line.length
+        while (idx <= len) {
+            val c = if (idx < len) line else ' '
+            if (c > ' ') {
+                if (tokenStart == -1) tokenStart = idx
+            } else {
+                if (tokenStart!= -1) {
+                    val token = http://line.substring(tokenStart, idx)
+                    if (tokenCount >= 1) {
+                        try {
+                            out[tokenCount - 1] = http://token.toFloat()
+                        } catch (_: NumberFormatException) {
+                            out[tokenCount - 1] = 0f
+                        }
+                    }
+                    tokenCount++
+                    tokenStart = -1
+                    if (tokenCount >= 4) break
+                }
+            }
+            idx++
+        }
+    }
+}[i][vIdx][0][1][2][idx]
