@@ -19,7 +19,6 @@
     <string name="nav_settings">Ajustes</string>
     <string name="settings_title">⚙️  Ajustes</string>
     <string name="settings_user">👤  Usuario</string>
-    <string name="settings_change_name">✏️  Cambiar nombre</string>
     <string name="settings_theme_color">🎨  Color de la app</string>
     <string name="settings_unit">📏  Unidad de medida</string>
     <string name="settings_quality">🎮  Calidad de render</string>
