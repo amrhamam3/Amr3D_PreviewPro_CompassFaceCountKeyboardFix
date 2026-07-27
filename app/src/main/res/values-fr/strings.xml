@@ -35,17 +35,17 @@
     <string name="intro_skip">Passer ⏭</string>
     <string name="settings_about_video">🎬  Voir la vidéo de présentation</string>
     <string name="settings_show_reflection">Afficher le reflet sous le modèle</string>
-    <string name="settings_show_reflection_desc">Si désactivé, une grille s'affichera à la place</string>
+    <string name="settings_show_reflection_desc">Si désactivé, une grille s\'affichera à la place</string>
     <string name="settings_face_count">Compteur de faces et sommets</string>
-    <string name="settings_face_count_desc">Petit texte en haut de l'écran indiquant le nombre de faces et sommets</string>
+    <string name="settings_face_count_desc">Petit texte en haut de l\'écran indiquant le nombre de faces et sommets</string>
     <string name="settings_change_name">👤  Changer le nom</string>
     <string name="settings_change_name_hint">Votre nouveau nom</string>
     <string name="settings_default_name">ami</string>
     <string name="action_save">Enregistrer</string>
     <string name="action_cancel">Annuler</string>
     <string name="action_clear">Effacer</string>
-    <string name="settings_clear_history_title">🗑️ Effacer l'historique</string>
-    <string name="settings_clear_history_msg">Voulez-vous effacer tout l'historique des fichiers ?</string>
+    <string name="settings_clear_history_title">🗑️ Effacer l\'historique</string>
+    <string name="settings_clear_history_msg">Voulez-vous effacer tout l\'historique des fichiers ?</string>
     <string name="app_version_info">🎮  Amr3D Preview Pro
 Version 7.0
 Amr Hamam 3D © 2026</string>
