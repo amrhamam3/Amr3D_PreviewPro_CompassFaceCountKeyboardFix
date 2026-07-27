@@ -37,10 +37,10 @@ object STLParser {
 
     private fun safeTriangleCap(): Int {
         val maxHeapBytes = Runtime.getRuntime().maxMemory()
-        val budgetBytes = (maxHeapBytes * 0.18).toLong()
+        val budgetBytes = (maxHeapBytes * 0.22).toLong() // زودناها شوية
         val bytesPerTriangle = 72L
         val cap = budgetBytes / bytesPerTriangle
-        return cap.coerceIn(250_000L, 4_000_000L).toInt()
+        return cap.coerceIn(500_000L, 8_000_000L).toInt() // حد اعلى اكبر عشان ميكسرش الموديل
     }
 
     private fun readFully(input: InputStream, buffer: ByteArray, offset: Int, length: Int) {
@@ -126,7 +126,7 @@ object STLParser {
         val resolver = context.contentResolver
         val rawHeader = ByteArray(BINARY_HEADER_TOTAL)
         resolver.openInputStream(uri)?.use { stream -> readFully(stream, rawHeader, 0, BINARY_HEADER_TOTAL) }
-           ?: throw STLParseException(context.getString(R.string.error_stl_read_failed))
+          ?: throw STLParseException(context.getString(R.string.error_stl_read_failed))
 
         val triangleCount = ByteBuffer.wrap(rawHeader, HEADER_SIZE, 4).order(ByteOrder.LITTLE_ENDIAN).int
         if (triangleCount <= 0) throw STLParseException(context.getString(R.string.error_stl_no_valid_triangles))
