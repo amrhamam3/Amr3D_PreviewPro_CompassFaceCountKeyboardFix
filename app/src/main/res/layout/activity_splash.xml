@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_dark"
+    android:fitsSystemWindows="false">
+
+    <!-- خلفية Plexus بدل Wireframe -->
+    <com.amr3d.preview.pro.WireframeSplashView
+        android:id="@+id/wireframeAnim"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- محتوى مركزي -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:paddingBottom="80dp">
+
+        <FrameLayout
+            android:layout_width="240dp"
+            android:layout_height="240dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="24dp">
+
+            <com.amr3d.preview.pro.RingView
+                android:id="@+id/splashRingView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <ImageView
+                android:id="@+id/splashLogo"
+                android:layout_width="172dp"
+                android:layout_height="172dp"
+                android:layout_gravity="center"
+                android:scaleType="fitCenter"
+                android:contentDescription="Amr Hamam 3D"
+                android:background="@android:color/transparent" />
+
+        </FrameLayout>
+
+        <com.amr3d.preview.pro.LaserTextView
+            android:id="@+id/splashTitle"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginBottom="6dp" />
+
+        <TextView
+            android:id="@+id/splashDev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/splash_touch_hint"
+            android:textColor="#FF8A1E"
+            android:textSize="12sp"
+            android:letterSpacing="0.3"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="48dp" />
+
+        <!-- شارة "3D Mode"/"2D Mode" — بتظهر بس لما التطبيق يتفتح بملف من مصدر خارجي
+             (واتساب/تليجرام)، عشان توضح للمستخدم نوع العارض اللي هيفتح قبل ما ينتقل له -->
+        <TextView
+            android:id="@+id/splashModeLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.18"
+            android:paddingStart="18dp"
+            android:paddingEnd="18dp"
+            android:paddingTop="7dp"
+            android:paddingBottom="7dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="40dp"
+            android:visibility="gone"
+            android:alpha="0" />
+
+        <com.amr3d.preview.pro.GlowProgressBarView
+            android:id="@+id/splashProgress"
+            android:layout_width="300dp"
+            android:layout_height="46dp"
+            android:layout_gravity="center_horizontal" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="32dp"
+        android:text="Amr3D Preview Pro · Amr Hamam"
+        android:textColor="#444444"
+        android:textSize="10sp"
+        android:letterSpacing="0.1" />
+
+</FrameLayout>

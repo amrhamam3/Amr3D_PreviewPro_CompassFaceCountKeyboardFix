@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background_dark">
+
+    <!-- شريط المسار -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:orientation="horizontal"
+        android:background="@color/surface_dark"
+        android:paddingStart="8dp"
+        android:paddingEnd="12dp"
+        android:gravity="center_vertical">
+
+        <ImageButton
+            android:id="@+id/btnBackDir"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_history"
+            android:background="@android:color/transparent"
+            android:tint="@color/accent_orange"
+            android:contentDescription="رجوع"
+            android:padding="8dp"
+            android:alpha="0.4" />
+
+        <TextView
+            android:id="@+id/currentPath"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="6dp"
+            android:textColor="@color/text_secondary"
+            android:textSize="11sp"
+            android:maxLines="1"
+            android:ellipsize="start" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🧊 STL · 📐 DXF"
+            android:textColor="@color/accent_orange"
+            android:textSize="10sp"
+            android:background="#1AFF8A1E"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp" />
+
+    </LinearLayout>
+
+    <!-- شريط البحث -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@drawable/bg_settings_row"
+        android:layout_margin="10dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🔍"
+            android:textSize="15sp"
+            android:layout_marginEnd="8dp" />
+
+        <EditText
+            android:id="@+id/searchBox"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:hint="@string/files_search_hint"
+            android:textColorHint="@color/text_secondary"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp"
+            android:inputType="text"
+            android:maxLines="1"
+            android:imeOptions="actionSearch" />
+
+    </LinearLayout>
+
+    <!-- Progress -->
+    <ProgressBar
+        android:id="@+id/browserProgress"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:indeterminate="true"
+        android:progressTint="@color/accent_orange"
+        android:visibility="gone" />
+
+    <!-- قائمة الملفات -->
+    <ListView
+        android:id="@+id/fileList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        android:fastScrollEnabled="true" />
+
+</LinearLayout>

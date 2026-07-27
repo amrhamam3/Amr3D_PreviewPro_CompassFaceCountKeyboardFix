@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Amr3D Preview Pro</string>
+    <string name="open_file">📂</string>
+    <string name="no_file_loaded">Sin archivo cargado\nToca 📂 para abrir STL o DXF</string>
+    <string name="measure_tool">📐 Medir</string>
+    <string name="inspect_tool">🔍</string>
+    <string name="reset_view">↺</string>
+    <string name="wireframe">🕸️ Malla</string>
+    <string name="material">🎨</string>
+    <string name="export_image">📷 Exportar</string>
+    <string name="light">💡 Luz</string>
+    <string name="directions">🧭</string>
+    <string name="unit_mm">📏</string>
+    <string name="nav_viewer">Visor</string>
+    <string name="nav_history">Historial</string>
+    <string name="nav_slicer">Slicer</string>
+    <string name="nav_files">Archivos</string>
+    <string name="nav_settings">Ajustes</string>
+    <string name="settings_title">⚙️  Ajustes</string>
+    <string name="settings_user">👤  Usuario</string>
+    <string name="settings_change_name">✏️  Cambiar nombre</string>
+    <string name="settings_theme_color">🎨  Color de la app</string>
+    <string name="settings_unit">📏  Unidad de medida</string>
+    <string name="settings_quality">🎮  Calidad de render</string>
+    <string name="settings_quality_high">🔥  Alta</string>
+    <string name="settings_quality_medium">⚡  Media</string>
+    <string name="settings_quality_low">💨  Baja</string>
+    <string name="settings_sound">🔊  Sonido de navegación</string>
+    <string name="settings_anim">✨  Animación de transición</string>
+    <string name="settings_permissions">🔐  Permisos</string>
+    <string name="settings_file_access">📁  Acceso a todos los archivos</string>
+    <string name="settings_file_access_granted">✅  Concedido</string>
+    <string name="settings_actions">🛠️  Acciones</string>
+    <string name="settings_clear_history">🗑️  Borrar historial</string>
+    <string name="intro_skip">Saltar ⏭</string>
+    <string name="settings_about_video">🎬  Ver video de introducción</string>
+    <string name="settings_show_reflection">Mostrar reflejo bajo el modelo</string>
+    <string name="settings_show_reflection_desc">Si se desactiva, se mostrará una cuadrícula</string>
+    <string name="settings_face_count">Contador de caras y vértices</string>
+    <string name="settings_face_count_desc">Texto pequeño en la parte superior que muestra el número de caras y vértices</string>
+    <string name="settings_change_name">👤  Cambiar nombre</string>
+    <string name="settings_change_name_hint">Tu nuevo nombre</string>
+    <string name="settings_default_name">amigo</string>
+    <string name="action_save">Guardar</string>
+    <string name="action_cancel">Cancelar</string>
+    <string name="action_clear">Borrar</string>
+    <string name="settings_clear_history_title">🗑️ Borrar historial</string>
+    <string name="settings_clear_history_msg">¿Deseas borrar todo el historial de archivos?</string>
+    <string name="app_version_info">🎮  Amr3D Preview Pro
+Versión 7.0
+Amr Hamam 3D © 2026</string>
+    <string name="greeting_with_name">Bienvenido %1$s 👋
+
+</string>
+    <string name="settings_contact_wa">💬  Contacto WhatsApp</string>
+    <string name="settings_language">🌐  Idioma</string>
+    <string name="settings_appearance">Apariencia</string>
+    <string name="settings_viewer_section">Visor</string>
+    <string name="settings_general">General</string>
+    <string name="history_empty">🕐\n\nSin historial\nAbre un archivo STL o DXF</string>
+    <string name="history_title">🕐  Abiertos recientemente</string>
+    <string name="file_not_found">⚠️ Archivo no encontrado</string>
+    <string name="loading_file">Abriendo…</string>
+    <string name="loading_analyzing">Analizando…</string>
+    <string name="loading_preparing">Preparando…</string>
+    <string name="loading_done">Listo ✓</string>
+    <string name="dxf_mode">📐 Modo DXF 2D</string>
+    <string name="stl_mode">🧊 Modo STL 3D</string>
+
+    <string name="splash_touch_hint">TOCA PARA INTERACTUAR</string>
+    <string name="history_clear">🗑️ Borrar</string>
+    <string name="unit_mm_full">📏  Milímetro (mm)</string>
+    <string name="unit_cm_full">📏  Centímetro (cm)</string>
+    <string name="unit_inch_full">📐  Pulgada (inch)</string>
+    <string name="settings_quality_high_full">🔥  Alta (todos los triángulos)</string>
+    <string name="settings_quality_medium_full">⚡  Media (más rápido)</string>
+    <string name="settings_quality_low_full">💨  Baja (dispositivos débiles)</string>
+    <string name="settings_sound_anim_header">🎵  Sonido y animación</string>
+    <string name="slicer_header">Slicer</string>
+    <string name="slicer_wip">En desarrollo 🚧</string>
+    <string name="slicer_wip_desc">Abre primero un archivo STL desde el visor\nLas funciones de corte llegarán pronto</string>
+    <string name="dir_up">⬆ Arriba</string>
+    <string name="dir_left">◀ Izquierda</string>
+    <string name="dir_front">Frente</string>
+    <string name="dir_right">Derecha ▶</string>
+    <string name="dir_down">⬇ Abajo</string>
+    <string name="dir_back">↩ Atrás</string>
+    <string name="welcome_greeting">👋  Bienvenido, %1$s</string>
+    <string name="welcome_overlay">🎮  Bienvenido\n%1$s</string>
+    <string name="measure_first_point">Primer punto seleccionado — toca un segundo punto</string>
+    <string name="toast_settings_open_failed">No se pudieron abrir los ajustes</string>
+    <string name="toast_some_folders_hidden">Algunas carpetas no aparecerán sin permiso</string>
+    <string name="toast_file_access_required">Se requiere permiso de acceso a archivos</string>
+    <string name="toast_root_folder">Estás en la carpeta raíz</string>
+    <string name="toast_cannot_access_folder">No se puede acceder a esta carpeta</string>
+    <string name="toast_no_stl_dxf_here">No hay archivos STL o DXF aquí</string>
+    <string name="toast_error_prefix">Error: %1$s</string>
+    <string name="toast_saved_name">✅ Guardado: %1$s</string>
+    <string name="toast_applies_next_file">Se aplicará al abrir el siguiente archivo</string>
+    <string name="toast_permission_already_granted">✅ Permiso ya concedido</string>
+    <string name="toast_cleared">✅ Borrado</string>
+    <string name="toast_theme_applied">✅ %1$s\nSe aplicará por completo al reabrir la app</string>
+    <string name="toast_tap_two_points">Toca dos puntos en el modelo</string>
+    <string name="toast_open_file_first">Abre un archivo primero</string>
+    <string name="toast_triangle_count">✅  %1$d triángulos</string>
+    <string name="model_stats_overlay">Caras: %1$d\nVértices: %2$d</string>
+    <string name="toast_permission_error">Error de permisos — inténtalo de nuevo</string>
+    <string name="toast_file_read_error">No se pudo leer el archivo: %1$s</string>
+    <string name="toast_file_too_large">⚠️ El archivo es demasiado grande para la memoria disponible del dispositivo. Prueba con un archivo más pequeño o con menos detalle</string>
+
+    <string name="large_file_warning_title">⚠️ Archivo grande</string>
+    <string name="large_file_warning_message">⚠️ Este archivo es grande (%1$s MB) — puede tardar más en cargar y usar más memoria</string>
+    <string name="large_file_btn_continue">Continuar</string>
+    <string name="large_file_btn_back">Atrás</string>
+    <string name="large_file_confirm_title">Confirmar carga</string>
+    <string name="large_file_simplify_message">De acuerdo. Para mantener un rendimiento fluido, la resolución del modelo se simplificará automáticamente durante la visualización — la forma general y las dimensiones se mantienen exactamente iguales, solo algunos detalles muy finos pueden reducirse un poco. ¿Continuar?</string>
+    <string name="large_file_confirm_message_generic">De acuerdo, ¿quieres continuar y cargar el archivo?</string>
+    <string name="large_file_btn_agree">Aceptar</string>
+    <string name="large_file_btn_cancel">Cancelar</string>
+
+    <string name="dialog_welcome_title">🎮  Bienvenido a Amr3D Preview</string>
+    <string name="dialog_welcome_message">¿Cuál es tu nombre?</string>
+    <string name="dialog_name_hint">Escribe tu nombre aquí</string>
+    <string name="dialog_start_btn">Empezar</string>
+    <string name="default_friend_name">amigo</string>
+    <string name="toast_no_point_selected">No se seleccionó ningún punto</string>
+    <string name="toast_save_failed">No se pudo guardar</string>
+    <string name="share_export_title">Exportar imagen</string>
+    <string name="whatsapp_default_msg">Hola, tengo una pregunta sobre la app Amr3D Preview</string>
+    <string name="measure_distance_label">Distancia: %1$.3f %2$s</string>
+    <string name="inspection_report_header">📐 Dimensiones del modelo\n─────────────────</string>
+    <string name="inspection_width_label">Longitud (X): %1$s %2$s</string>
+    <string name="inspection_depth_label">Ancho (Y):    %1$s %2$s</string>
+    <string name="inspection_height_label">Altura (Z):   %1$s %2$s</string>
+
+    <string name="toast_entity_count">✅  %1$d elementos</string>
+
+    <string name="loading_large_file_hint">⏳ Este archivo parece relativamente grande, espera un momento</string>
+
+    <string name="toast_dxf_distance">📏 Distancia: %1$.2f %2$s</string>
+
+    <string name="error_dxf_open_failed">No se pudo abrir el archivo DXF</string>
+    <string name="error_dxf_no_entities">No se encontró la sección ENTITIES</string>
+    <string name="error_dxf_no_displayable">No se encontraron elementos visibles en el archivo DXF</string>
+
+    <string name="error_stl_open_failed">No se pudo abrir el archivo</string>
+    <string name="error_stl_empty">El archivo está vacío</string>
+    <string name="error_stl_too_large">Archivo demasiado grande (más de 500 MB). No compatible</string>
+    <string name="error_stl_read_failed">No se pudo leer el archivo</string>
+    <string name="error_stl_binary_corrupt">El archivo STL binario está dañado o incompleto</string>
+    <string name="error_stl_triangle_mismatch">El número de triángulos (%1$d) no coincide con el tamaño del archivo — puede estar dañado</string>
+    <string name="error_stl_no_valid_triangles">El archivo no contiene triángulos válidos</string>
+    <string name="error_stl_corrupt_triangle">Archivo STL dañado - no se puede leer el triángulo n.º %1$d</string>
+    <string name="error_stl_invalid_value">Valor no válido en el archivo en: %1$s</string>
+    <string name="error_stl_ascii_no_triangles">No se encontraron triángulos válidos en el archivo STL ASCII</string>
+
+    <string name="dialog_permission_title">🔐  Permiso de acceso a archivos</string>
+    <string name="dialog_permission_message">Para mostrar archivos STL y DXF de todas las carpetas de tu dispositivo, la app necesita el permiso \"Acceso a todos los archivos\".\n\nSe abrirá la página de ajustes — activa el permiso y vuelve a la app.</string>
+    <string name="dialog_open_settings">Abrir ajustes</string>
+    <string name="dialog_later">Más tarde</string>
+
+    <string name="toast_waiting_second_point">Esperando el segundo punto de medición</string>
+
+    <string name="dialog_clear_history_title">🗑️  Borrar historial</string>
+    <string name="dialog_clear_history_message">¿Borrar todo el historial de archivos?</string>
+    <string name="dialog_clear">Borrar</string>
+    <string name="dialog_cancel">Cancelar</string>
+    <string name="history_file_missing">No encontrado</string>
+
+    <string name="unit_short_mm">mm</string>
+    <string name="unit_short_cm">cm</string>
+    <string name="unit_short_inch">pulg</string>
+
+    <string name="material_plastic">Plástico</string>
+    <string name="material_metal">Metal</string>
+    <string name="material_wood">Madera</string>
+    <string name="material_marble">Mármol</string>
+    <string name="material_copper">Cobre</string>
+    <string name="material_carbon">Carbono</string>
+    <string name="material_gold">Oro</string>
+    <string name="material_rubber">Goma</string>
+
+    <string name="dialog_change_name_title">👤  Cambiar nombre</string>
+    <string name="hint_new_name">Tu nuevo nombre</string>
+    <string name="default_user_name">Amigo</string>
+    <string name="dialog_save">Guardar</string>
+    <string name="whatsapp_inquiry_message">Hola, tengo una pregunta sobre la app Amr3D Preview</string>
+    <string name="permission_granted_all_files">✅  Activado — Acceso a todos los archivos</string>
+    <string name="permission_request_all_files">📁  Permiso de acceso a todos los archivos</string>
+    <string name="about_greeting">Hola %1$s 👋\n\n</string>
+    <string name="about_app_info">%1$s🎮  Amr3D Preview Pro\nVersión 7.0\nAmr Hamam 3D © 2026</string>
+
+    <string name="bg_color_dark">Oscuro</string>
+    <string name="bg_color_black">Negro</string>
+    <string name="bg_color_gray">Gris</string>
+    <string name="bg_color_white">Blanco</string>
+    <string name="bg_color_navy">Azul marino</string>
+    <string name="dialog_choose_material_title">🎨  Elegir material</string>
+    <string name="section_background">Fondo</string>
+    <string name="files_search_hint">Buscar archivos...</string>
+    <string name="files_folder_item_count">%1$d elementos</string>
+    <string name="files_item_meta_format">%1$s  ·  %2$s</string>
+    <string name="settings_zup">Eje vertical: Z (3ds Max/CAD)</string>
+    <string name="settings_zup_sub">Actívalo para archivos Z-up — desactívalo si el archivo ya es Y-up</string>
+
+    <!-- Lista de capas DXF -->
+    <string name="layers_tool">🗂️ Capas</string>
+    <string name="dialog_layers_title">Capas del dibujo</string>
+    <string name="dxf_cut_length_summary">📏 Longitud total de corte: %1$.1f mm (%2$d trazados)</string>
+    <string name="dialog_close">Cerrar</string>
+    <string name="rotate_tool_description">Rotación automática</string>
+    <string name="layer_color_group">🎨 Color %1$d</string>
+
+    <!-- Botón y selector de color de fondo de DXF -->
+    <string name="dxf_background_tool">🎨 Color de fondo</string>
+    <string name="bounding_box_tool_description">Caja delimitadora</string>
+
+    <!-- Modo claro/oscuro -->
+    <string name="settings_light_mode">☀️ Modo claro</string>
+    <string name="settings_light_mode_sub">Fondo blanco para la interfaz en vez de oscuro — el visor elige un color adecuado automáticamente</string>
+</resources>

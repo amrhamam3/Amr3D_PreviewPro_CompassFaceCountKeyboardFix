@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background_dark">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:orientation="horizontal"
+        android:background="@color/surface_dark"
+        android:paddingStart="14dp"
+        android:paddingEnd="8dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/history_title"
+            android:textColor="@color/text_primary"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnClearHistory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/history_clear"
+            android:textSize="12sp"
+            android:textColor="@color/warning_red"
+            style="@style/Widget.MaterialComponents.Button.TextButton" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/emptyHistory"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/history_empty"
+        android:textColor="@color/text_secondary"
+        android:gravity="center"
+        android:textSize="15sp"
+        android:lineSpacingExtra="6dp"
+        android:visibility="gone" />
+
+    <ListView
+        android:id="@+id/historyList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="#1A2A2E36"
+        android:dividerHeight="1dp" />
+
+</LinearLayout>

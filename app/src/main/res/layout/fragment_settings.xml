@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_dark">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="20dp">
+            <TextView
+                android:layout_width="34dp" android:layout_height="34dp"
+                android:text="◈" android:gravity="center"
+                android:textColor="#1a0e02" android:textSize="16sp" android:textStyle="bold"
+                android:background="@color/accent_orange" android:layout_marginEnd="10dp"/>
+            <TextView
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="@string/settings_title"
+                android:textColor="@color/text_primary" android:textSize="17sp" android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- ══ الحساب ══ -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="@string/settings_user" android:textColor="@color/accent_orange"
+            android:textSize="11sp" android:textStyle="bold" android:letterSpacing="0.06"
+            android:layout_marginStart="10dp" android:layout_marginBottom="10dp"/>
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_settings_card_group"
+            android:padding="6dp"
+            android:layout_marginBottom="20dp">
+            <Button android:id="@+id/btnChangeName"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:minHeight="0dp"
+                android:background="?attr/selectableItemBackground"
+                android:text="@string/settings_change_name" android:textAllCaps="false"
+                android:textColor="@color/text_primary" android:textSize="14sp"
+                android:gravity="start|center_vertical" android:paddingStart="12dp" android:paddingEnd="12dp"
+                android:paddingTop="14dp" android:paddingBottom="14dp"/>
+        </LinearLayout>
+
+        <!-- ══ المظهر (ثيم + لغة مع بعض في كارت واحد) ══ -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="@string/settings_appearance" android:textColor="@color/accent_orange"
+            android:textSize="11sp" android:textStyle="bold" android:letterSpacing="0.06"
+            android:layout_marginStart="10dp" android:layout_marginBottom="10dp"/>
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_settings_card_group"
+            android:padding="10dp"
+            android:layout_marginBottom="20dp">
+
+            <LinearLayout android:id="@+id/themeColorRow"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="6dp"
+                android:layout_marginBottom="10dp"/>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:gravity="center_vertical"
+                android:paddingStart="10dp" android:paddingEnd="10dp"
+                android:paddingTop="10dp" android:paddingBottom="12dp">
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:orientation="vertical">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="@string/settings_light_mode" android:textColor="@color/text_primary" android:textSize="14sp"/>
+                </LinearLayout>
+                <Switch android:id="@+id/switchLightMode"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:thumbTint="@color/accent_orange" android:trackTint="#3AFF8A1E"/>
+            </LinearLayout>
+
+            <RadioGroup android:id="@+id/languageGroup"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:padding="6dp">
+                <RadioButton android:id="@+id/radioLangAr" android:text="🇪🇬  العربية"
+                    android:textColor="@color/text_primary" android:buttonTint="@color/accent_orange"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingStart="8dp"/>
+                <RadioButton android:id="@+id/radioLangEn" android:text="🇬🇧  English"
+                    android:textColor="@color/text_primary" android:buttonTint="@color/accent_orange"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingStart="8dp"/>
+                <RadioButton android:id="@+id/radioLangFr" android:text="🇫🇷  Français"
+                    android:textColor="@color/text_primary" android:buttonTint="@color/accent_orange"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingStart="8dp"/>
+                <RadioButton android:id="@+id/radioLangEs" android:text="🇪🇸  Español"
+                    android:textColor="@color/text_primary" android:buttonTint="@color/accent_orange"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingStart="8dp"/>
+            </RadioGroup>
+        </LinearLayout>
+
+        <!-- ══ العارض (جودة + مؤشر Pivot + دوران تلقائي + وحدة قياس مع بعض) ══ -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="@string/settings_viewer_section" android:textColor="@color/accent_orange"
+            android:textSize="11sp" android:textStyle="bold" android:letterSpacing="0.06"
+            android:layout_marginStart="10dp" android:layout_marginBottom="10dp"/>
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_settings_card_group"
+            android:padding="6dp"
+            android:layout_marginBottom="20dp">
+
+            <RadioGroup android:id="@+id/qualityGroup"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:padding="8dp">
+                <RadioButton android:id="@+id/radioHigh" android:text="@string/settings_quality_high_full"
+                    android:textColor="@color/text_primary" android:buttonTint="@color/accent_orange"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingStart="8dp"/>
+                <RadioButton android:id="@+id/radioMedium" android:text="@string/settings_quality_medium_full"
+                    android:textColor="@color/text_primary" android:buttonTint="@color/accent_orange"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingStart="8dp"/>
+                <RadioButton android:id="@+id/radioLow" android:text="@string/settings_quality_low_full"
+                    android:textColor="@color/text_primary" android:buttonTint="@color/accent_orange"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingStart="8dp"/>
+            </RadioGroup>
+
+            <RadioGroup android:id="@+id/unitGroup"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:padding="8dp">
+                <RadioButton android:id="@+id/radioMM" android:text="@string/unit_mm_full"
+                    android:textColor="@color/text_primary" android:buttonTint="@color/accent_orange"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingStart="8dp"/>
+                <RadioButton android:id="@+id/radioCM" android:text="@string/unit_cm_full"
+                    android:textColor="@color/text_primary" android:buttonTint="@color/accent_orange"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingStart="8dp"/>
+                <RadioButton android:id="@+id/radioInch" android:text="@string/unit_inch_full"
+                    android:textColor="@color/text_primary" android:buttonTint="@color/accent_orange"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingStart="8dp"/>
+            </RadioGroup>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:gravity="center_vertical"
+                android:paddingStart="10dp" android:paddingEnd="10dp"
+                android:paddingTop="12dp" android:paddingBottom="12dp">
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:orientation="vertical">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="@string/settings_zup" android:textColor="@color/text_primary" android:textSize="14sp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="@string/settings_zup_sub" android:textColor="@color/text_secondary" android:textSize="11sp"
+                        android:layout_marginTop="2dp"/>
+                </LinearLayout>
+                <Switch android:id="@+id/switchZUp"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:thumbTint="@color/accent_orange" android:trackTint="#3AFF8A1E"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:gravity="center_vertical"
+                android:paddingStart="10dp" android:paddingEnd="10dp"
+                android:paddingTop="12dp" android:paddingBottom="12dp">
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:orientation="vertical">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="@string/settings_show_reflection" android:textColor="@color/text_primary" android:textSize="14sp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="@string/settings_show_reflection_desc" android:textColor="@color/text_secondary" android:textSize="11sp"
+                        android:layout_marginTop="2dp"/>
+                </LinearLayout>
+                <Switch android:id="@+id/switchReflection"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:thumbTint="@color/accent_orange" android:trackTint="#3AFF8A1E"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:gravity="center_vertical"
+                android:paddingStart="10dp" android:paddingEnd="10dp"
+                android:paddingTop="12dp" android:paddingBottom="12dp">
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:orientation="vertical">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="@string/settings_face_count" android:textColor="@color/text_primary" android:textSize="14sp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="@string/settings_face_count_desc" android:textColor="@color/text_secondary" android:textSize="11sp"
+                        android:layout_marginTop="2dp"/>
+                </LinearLayout>
+                <Switch android:id="@+id/switchFaceCount"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:thumbTint="@color/accent_orange" android:trackTint="#3AFF8A1E"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- ══ عام (صوت + انيميشن مع بعض) ══ -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="@string/settings_general" android:textColor="@color/accent_orange"
+            android:textSize="11sp" android:textStyle="bold" android:letterSpacing="0.06"
+            android:layout_marginStart="10dp" android:layout_marginBottom="10dp"/>
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_settings_card_group"
+            android:padding="6dp"
+            android:layout_marginBottom="20dp">
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:gravity="center_vertical"
+                android:paddingStart="10dp" android:paddingEnd="10dp"
+                android:paddingTop="12dp" android:paddingBottom="12dp">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:text="@string/settings_sound"
+                    android:textColor="@color/text_primary" android:textSize="14sp"/>
+                <Switch android:id="@+id/switchSound"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:thumbTint="@color/accent_orange" android:trackTint="#3AFF8A1E"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:gravity="center_vertical"
+                android:paddingStart="10dp" android:paddingEnd="10dp"
+                android:paddingTop="12dp" android:paddingBottom="12dp">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:text="@string/settings_anim"
+                    android:textColor="@color/text_primary" android:textSize="14sp"/>
+                <Switch android:id="@+id/switchAnim"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:thumbTint="@color/accent_orange" android:trackTint="#3AFF8A1E"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- ══ الأذونات والإجراءات مع بعض ══ -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="@string/settings_permissions" android:textColor="@color/accent_orange"
+            android:textSize="11sp" android:textStyle="bold" android:letterSpacing="0.06"
+            android:layout_marginStart="10dp" android:layout_marginBottom="10dp"/>
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_settings_card_group"
+            android:padding="6dp"
+            android:layout_marginBottom="20dp">
+
+            <Button android:id="@+id/btnFileAccess"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:minHeight="0dp"
+                android:background="?attr/selectableItemBackground"
+                android:text="@string/settings_file_access" android:textAllCaps="false"
+                android:textColor="@color/text_primary" android:textSize="14sp"
+                android:gravity="start|center_vertical" android:paddingStart="12dp" android:paddingEnd="12dp"
+                android:paddingTop="14dp" android:paddingBottom="14dp"/>
+
+            <Button android:id="@+id/btnClearHistorySettings"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:minHeight="0dp"
+                android:background="?attr/selectableItemBackground"
+                android:text="@string/settings_clear_history" android:textAllCaps="false"
+                android:textColor="#FF6B6B" android:textSize="14sp"
+                android:gravity="start|center_vertical" android:paddingStart="12dp" android:paddingEnd="12dp"
+                android:paddingTop="14dp" android:paddingBottom="14dp"/>
+        </LinearLayout>
+
+        <Button android:id="@+id/btnContactWA"
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="@string/settings_contact_wa" android:textAllCaps="false"
+            android:backgroundTint="#25D366" android:layout_marginBottom="20dp"/>
+
+        <!-- ══ معلومات ══ -->
+        <Button android:id="@+id/btnAboutVideo"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="@string/settings_about_video" android:textAllCaps="false"
+            android:layout_marginBottom="12dp"/>
+
+        <TextView android:id="@+id/tvVersion"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:textColor="@color/text_secondary" android:textSize="12sp"
+            android:gravity="center" android:lineSpacingExtra="4dp"/>
+
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,537 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_dark">
+
+    <!-- ═══ Top Bar ═══ -->
+    <LinearLayout
+        android:id="@+id/topBar"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@color/surface_dark"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:id="@+id/appLogo"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/app_logo"
+            android:contentDescription="@string/app_name" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginStart="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textColor="@color/text_primary"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:singleLine="true" />
+
+            <TextView
+                android:id="@+id/welcomeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/accent_orange"
+                android:textSize="10sp"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/btnWhatsapp"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_whatsapp"
+            android:contentDescription="واتساب"
+            android:padding="6dp" />
+
+        <TextView
+            android:id="@+id/btnToggleDxf"
+            android:layout_width="44dp"
+            android:layout_height="34dp"
+            android:background="@drawable/bg_toggle_button"
+            android:gravity="center"
+            android:text="2D"
+            android:textColor="@color/accent_orange"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.02"
+            android:clickable="true"
+            android:focusable="true"
+            android:contentDescription="@string/toggle_dxf_view"
+            android:layout_marginStart="6dp" />
+
+    </LinearLayout>
+
+    <!-- ═══ منطقة GL ═══ -->
+    <FrameLayout
+        android:id="@+id/viewerContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/topBar"
+        app:layout_constraintBottom_toTopOf="@id/displayToolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.amr3d.preview.pro.GLViewerView
+            android:id="@+id/glViewerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <!-- جسيمات زخرفية عائمة خفيفة — فوق العارض علشان تبان، بس مش قابلة للمس
+             عشان اللمس يوصل للموديل تحتها زي ما هو -->
+        <com.amr3d.preview.pro.ParticleFieldView
+            android:id="@+id/particleField"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="false"
+            android:focusable="false" />
+
+        <!-- دايرة تأكيد تغيير نقطة الدوران (pivot) بالضغطة المطوّلة -->
+        <com.amr3d.preview.pro.PivotFeedbackView
+            android:id="@+id/pivotFeedbackView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="false"
+            android:focusable="false" />
+
+        <!-- شاشة عرض DXF ثنائية الأبعاد — بديل للـ GL لما الملف يكون DXF -->
+        <com.amr3d.preview.pro.DXF2DView
+            android:id="@+id/dxf2DView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+
+        <!-- عداد Faces/Vertices — نص خفيف أعلى الشاشة، قابل للإخفاء من الإعدادات
+             (افتراضيًا ظاهر). بيبان بس مع الموديل ثلاثي الأبعاد. -->
+        <TextView
+            android:id="@+id/modelStatsText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|center_horizontal"
+            android:layout_marginTop="10dp"
+            android:textColor="#D9E0C840"
+            android:textSize="10.5sp"
+            android:fontFamily="monospace"
+            android:gravity="center"
+            android:lineSpacingExtra="2dp"
+            android:clickable="false"
+            android:focusable="false"
+            android:visibility="gone" />
+
+        <!-- نص الحالة الفارغة -->
+        <TextView
+            android:id="@+id/emptyStateText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/no_file_loaded"
+            android:textColor="@color/text_secondary"
+            android:textSize="15sp"
+            android:gravity="center"
+            android:lineSpacingExtra="4dp" />
+
+        <!-- زر الاتجاهات الـ 6 — أعلى يسار -->
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|start"
+            android:layout_margin="8dp">
+
+            <!-- الزر الصغير -->
+            <Button
+                android:id="@+id/btnDirections"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:text="@string/directions"
+                android:textSize="18sp"
+                android:padding="0dp"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:backgroundTint="@color/surface_overlay"
+                android:elevation="4dp" />
+
+            <!-- لوحة الاتجاهات — بوصلة دائرية (زي المعاينة amr3d_enhanced_v3) -->
+            <FrameLayout
+                android:id="@+id/directionsPanel"
+                android:layout_width="132dp"
+                android:layout_height="132dp"
+                android:layout_marginTop="50dp"
+                android:layoutDirection="ltr"
+                android:background="@drawable/bg_compass_disc"
+                android:elevation="8dp"
+                android:visibility="gone">
+
+                <!-- حلقة منقّطة زخرفية بس (بتلف ببطء عن طريق RotateAnimation في الكود) -->
+                <ImageView
+                    android:id="@+id/compassRing"
+                    android:layout_width="94dp"
+                    android:layout_height="94dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/bg_compass_ring" />
+
+                <Button
+                    android:id="@+id/btnViewTop"
+                    style="@style/Widget.MaterialComponents.Button"
+                    android:layout_width="34dp" android:layout_height="34dp"
+                    android:layout_marginStart="49dp" android:layout_marginTop="4dp"
+                    android:text="@string/dir_up" android:textSize="9sp"
+                    android:textColor="@color/text_primary"
+                    android:background="@drawable/bg_compass_button"
+                    android:padding="0dp" android:minWidth="0dp" android:minHeight="0dp"
+                    android:insetTop="0dp" android:insetBottom="0dp" />
+
+                <Button
+                    android:id="@+id/btnViewLeft"
+                    style="@style/Widget.MaterialComponents.Button"
+                    android:layout_width="34dp" android:layout_height="34dp"
+                    android:layout_marginStart="4dp" android:layout_marginTop="49dp"
+                    android:text="@string/dir_left" android:textSize="9sp"
+                    android:textColor="@color/text_primary"
+                    android:background="@drawable/bg_compass_button"
+                    android:padding="0dp" android:minWidth="0dp" android:minHeight="0dp"
+                    android:insetTop="0dp" android:insetBottom="0dp" />
+
+                <Button
+                    android:id="@+id/btnViewRight"
+                    style="@style/Widget.MaterialComponents.Button"
+                    android:layout_width="34dp" android:layout_height="34dp"
+                    android:layout_marginStart="94dp" android:layout_marginTop="49dp"
+                    android:text="@string/dir_right" android:textSize="9sp"
+                    android:textColor="@color/text_primary"
+                    android:background="@drawable/bg_compass_button"
+                    android:padding="0dp" android:minWidth="0dp" android:minHeight="0dp"
+                    android:insetTop="0dp" android:insetBottom="0dp" />
+
+                <Button
+                    android:id="@+id/btnViewBottom"
+                    style="@style/Widget.MaterialComponents.Button"
+                    android:layout_width="34dp" android:layout_height="34dp"
+                    android:layout_marginStart="49dp" android:layout_marginTop="94dp"
+                    android:text="@string/dir_down" android:textSize="9sp"
+                    android:textColor="@color/text_primary"
+                    android:background="@drawable/bg_compass_button"
+                    android:padding="0dp" android:minWidth="0dp" android:minHeight="0dp"
+                    android:insetTop="0dp" android:insetBottom="0dp" />
+
+                <Button
+                    android:id="@+id/btnViewBack"
+                    style="@style/Widget.MaterialComponents.Button"
+                    android:layout_width="28dp" android:layout_height="28dp"
+                    android:layout_marginStart="96dp" android:layout_marginTop="96dp"
+                    android:text="@string/dir_back" android:textSize="8sp"
+                    android:textColor="@color/text_primary" android:alpha="0.9"
+                    android:background="@drawable/bg_compass_button"
+                    android:padding="0dp" android:minWidth="0dp" android:minHeight="0dp"
+                    android:insetTop="0dp" android:insetBottom="0dp" />
+
+                <Button
+                    android:id="@+id/btnViewFront"
+                    style="@style/Widget.MaterialComponents.Button"
+                    android:layout_width="40dp" android:layout_height="40dp"
+                    android:layout_marginStart="46dp" android:layout_marginTop="46dp"
+                    android:text="@string/dir_front" android:textSize="10sp"
+                    android:textAllCaps="false" android:textColor="#1a0e02" android:textStyle="bold"
+                    android:background="@drawable/bg_compass_center"
+                    android:padding="0dp" android:minWidth="0dp" android:minHeight="0dp"
+                    android:insetTop="0dp" android:insetBottom="0dp"
+                    android:elevation="2dp" />
+
+            </FrameLayout>
+        </FrameLayout>
+
+        <!-- شريط التحميل -->
+        <LinearLayout
+            android:id="@+id/loadingContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:orientation="vertical"
+            android:background="@color/surface_overlay"
+            android:padding="14dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/loadingText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/accent_orange"
+                android:textSize="12sp"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="6dp" />
+
+            <ProgressBar
+                android:id="@+id/loadingProgress"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:max="100"
+                android:progress="0"
+                android:progressTint="@color/accent_orange"
+                android:progressBackgroundTint="#2A2D35" />
+
+        </LinearLayout>
+
+        <!-- Overlay ترحيب -->
+        <TextView
+            android:id="@+id/welcomeOverlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="#FFFFFFFF"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:background="#BB000000"
+            android:visibility="gone" />
+
+        <!-- بطاقة القياس -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/measurementCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|start"
+            android:layout_margin="10dp"
+            app:cardBackgroundColor="@color/surface_dark"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="6dp"
+            android:visibility="gone">
+            <TextView
+                android:id="@+id/measurementText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:textColor="@color/accent_blue"
+                android:textSize="13sp"
+                android:fontFamily="monospace" />
+        </androidx.cardview.widget.CardView>
+
+        <!-- زر طي/إظهار شرائط الأدوات — لتوفير مساحة أكبر للمعاينة -->
+        <Button
+            android:id="@+id/btnToggleToolbars"
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_width="44dp"
+            android:layout_height="20dp"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="2dp"
+            android:text="⌄"
+            android:textSize="14sp"
+            android:textColor="@color/accent_orange"
+            android:padding="0dp"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:backgroundTint="@color/surface_overlay"
+            android:elevation="4dp"
+            android:contentDescription="طي أو إظهار شرائط الأدوات" />
+
+        <!-- بطاقة الفحص — نفس هوية التطبيق (خلفية داكنة + إطار خارجي) بدل الشكل
+             الافتراضي البسيط، زي معالجة نوافذ التنبيه بالظبط -->
+        <LinearLayout
+            android:id="@+id/inspectionCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_margin="10dp"
+            android:background="@drawable/bg_dialog_panel"
+            android:elevation="6dp"
+            android:visibility="gone">
+            <TextView
+                android:id="@+id/inspectionText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="14dp"
+                android:textColor="@color/text_primary"
+                android:textSize="12sp"
+                android:fontFamily="monospace"
+                android:lineSpacingExtra="4dp" />
+        </LinearLayout>
+
+        <!-- ═══ عجلة الإضاءة (البند 2) — Overlay شفاف حوالين الموديل مباشرة، دائرة
+             كاملة 360°، آخر عنصر جوه viewerContainer عمدًا عشان تاخد اللمس أول
+             حاجة طول ما هي مفعّلة (فوق كل حاجة تانية). الموديل يفضل باين بالكامل
+             من ورا (شفافة تمامًا ما عدا مسار الحلقة والمقبض). ═══ -->
+        <com.amr3d.preview.pro.LightDialOverlayView
+            android:id="@+id/lightDialOverlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+
+        <!-- زر إغلاق أداة الإضاءة — أعلى يمين -->
+        <ImageButton
+            android:id="@+id/btnCloseLightWheel"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_gravity="top|end"
+            android:layout_margin="10dp"
+            android:background="@drawable/bg_toggle_button"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            android:tint="#CCCCCC"
+            android:visibility="gone"
+            android:contentDescription="إغلاق" />
+
+    </FrameLayout>
+
+    <!-- ═══ شريط الأدوات العلوي ═══ -->
+    <LinearLayout
+        android:id="@+id/displayToolbar"
+        android:layout_width="0dp"
+        android:layout_height="46dp"
+        android:orientation="horizontal"
+        android:background="@color/surface_dark"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp"
+        android:gravity="center_vertical"
+        app:layout_constraintBottom_toTopOf="@id/bottomToolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageButton
+            android:id="@+id/btnWireframe"
+            android:saveEnabled="false"
+            android:layout_width="0dp" android:layout_height="34dp" android:layout_weight="1"
+            android:layout_marginEnd="3dp"
+            android:padding="7dp"
+            android:scaleType="centerInside"
+            android:background="@drawable/bg_toggle_button"
+            android:src="@drawable/ic_wireframe_glyph"
+            android:tint="@color/accent_orange"
+            android:contentDescription="@string/wireframe" />
+
+        <ImageButton
+            android:id="@+id/btnMaterial"
+            android:layout_width="0dp" android:layout_height="34dp" android:layout_weight="1"
+            android:layout_marginEnd="3dp"
+            android:padding="7dp"
+            android:scaleType="centerInside"
+            android:background="@drawable/bg_toggle_button"
+            android:src="@drawable/ic_material_palette"
+            android:tint="@color/accent_orange"
+            android:contentDescription="@string/material" />
+
+        <Button
+            android:id="@+id/btnUnit"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="0dp" android:layout_height="34dp" android:layout_weight="1"
+            android:layout_marginEnd="3dp"
+            android:text="@string/unit_mm" android:textAllCaps="false"
+            android:textSize="16sp" android:textColor="@color/text_primary" />
+
+        <ImageButton
+            android:id="@+id/btnExport"
+            android:layout_width="0dp" android:layout_height="34dp" android:layout_weight="1"
+            android:layout_marginEnd="3dp"
+            android:padding="7dp"
+            android:scaleType="centerInside"
+            android:background="@drawable/bg_toggle_button"
+            android:src="@drawable/ic_camera_export"
+            android:tint="@color/accent_orange"
+            android:contentDescription="@string/export_image" />
+
+        <ImageButton
+            android:id="@+id/btnLightToggle"
+            android:saveEnabled="false"
+            android:layout_width="0dp" android:layout_height="34dp" android:layout_weight="1"
+            android:padding="7dp"
+            android:scaleType="centerInside"
+            android:background="@drawable/bg_toggle_button"
+            android:src="@drawable/ic_light_bulb"
+            android:tint="@color/accent_orange"
+            android:contentDescription="@string/light" />
+
+    </LinearLayout>
+
+    <!-- ═══ شريط الأدوات السفلي ═══ -->
+    <LinearLayout
+        android:id="@+id/bottomToolbar"
+        android:layout_width="0dp"
+        android:layout_height="46dp"
+        android:orientation="horizontal"
+        android:background="@color/surface_dark"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp"
+        android:gravity="center_vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageButton
+            android:id="@+id/btnAutoRotate"
+            android:saveEnabled="false"
+            android:layout_width="0dp" android:layout_height="34dp" android:layout_weight="1"
+            android:layout_marginEnd="3dp"
+            android:padding="7dp"
+            android:scaleType="centerInside"
+            android:background="@drawable/bg_toggle_button"
+            android:src="@drawable/ic_rotate"
+            android:tint="@color/accent_orange"
+            android:contentDescription="تدوير تلقائي" />
+
+        <ImageButton
+            android:id="@+id/btnMeasureTool"
+            android:saveEnabled="false"
+            android:layout_width="0dp" android:layout_height="34dp" android:layout_weight="1"
+            android:layout_marginEnd="3dp"
+            android:padding="7dp"
+            android:scaleType="centerInside"
+            android:background="@drawable/bg_toggle_button"
+            android:src="@drawable/ic_measure_ruler"
+            android:tint="@color/accent_orange"
+            android:contentDescription="@string/measure_tool" />
+
+        <ImageButton
+            android:id="@+id/btnInspect"
+            android:layout_width="0dp" android:layout_height="34dp" android:layout_weight="1"
+            android:layout_marginEnd="3dp"
+            android:padding="7dp"
+            android:scaleType="centerInside"
+            android:background="@drawable/bg_toggle_button"
+            android:src="@drawable/ic_inspect"
+            android:tint="@color/accent_orange"
+            android:contentDescription="@string/inspect_tool" />
+
+        <ImageButton
+            android:id="@+id/btnResetView"
+            android:layout_width="0dp" android:layout_height="34dp" android:layout_weight="1"
+            android:layout_marginEnd="3dp"
+            android:padding="7dp"
+            android:scaleType="centerInside"
+            android:background="@drawable/bg_toggle_button"
+            android:src="@drawable/ic_reset_view"
+            android:tint="@color/accent_orange"
+            android:contentDescription="@string/reset_view" />
+
+        <ImageButton
+            android:id="@+id/btnBoundingBox"
+            android:saveEnabled="false"
+            android:layout_width="0dp" android:layout_height="34dp" android:layout_weight="1"
+            android:padding="7dp"
+            android:scaleType="centerInside"
+            android:background="@drawable/bg_toggle_button"
+            android:src="@drawable/ic_bounding_box"
+            android:tint="@color/accent_orange"
+            android:contentDescription="صندوق الأبعاد" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

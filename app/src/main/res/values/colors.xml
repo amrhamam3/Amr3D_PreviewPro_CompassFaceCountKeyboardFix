@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ══ الثيم الفاتح (values/ الافتراضي) ══
+         نفس أسماء الألوان بالظبط الموجودة في values-night/colors.xml — بس بقيم فاتحة.
+         الفكرة إن كل layout في المشروع بيستخدم @color/background_dark أو @color/text_primary
+         بالاسم، فمش محتاجين نلمس ولا XML واحد تاني؛ AppCompatDelegate.setDefaultNightMode
+         (شوف AppDisplayMode.kt) هو اللي بيقرر أي نسخة من الملفين تتفعل. -->
+    <color name="background_dark">#F1F2F5</color>
+    <!-- سطح البطاقات في الوضع الفاتح — أبيض صريح عشان يفضل فيه تمايز واضح عن خلفية الصفحة -->
+    <color name="surface_dark">#FFFFFF</color>
+    <color name="accent_orange">#FF8A1E</color>
+    <color name="accent_blue">#1A6FD1</color>
+    <color name="text_primary">#15171C</color>
+    <color name="text_secondary">#5B6472</color>
+    <color name="warning_red">#D93A2E</color>
+    <color name="success_green">#1F8F58</color>
+
+    <!-- نسخة الوضع الفاتح من ألوان العناصر العائمة (شوف values-night/colors.xml
+         للتوثيق الكامل) -->
+    <color name="surface_overlay">#CCFFFFFF</color>
+    <color name="compass_disc_center">#E6FFFFFF</color>
+    <color name="compass_disc_edge">#8CFFFFFF</color>
+</resources>

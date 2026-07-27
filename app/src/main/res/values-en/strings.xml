@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Amr3D Preview Pro</string>
+    <string name="open_file">📂</string>
+    <string name="no_file_loaded">No file loaded\nTap 📂 to open an STL or DXF file</string>
+    <string name="measure_tool">📐 Measure</string>
+    <string name="inspect_tool">🔍</string>
+    <string name="reset_view">↺</string>
+    <string name="wireframe">🕸️ Wireframe</string>
+    <string name="material">🎨</string>
+    <string name="export_image">📷 Export</string>
+    <string name="light">💡 Light</string>
+    <string name="directions">🧭</string>
+    <string name="unit_mm">📏</string>
+    <string name="nav_viewer">Viewer</string>
+    <string name="nav_history">History</string>
+    <string name="nav_slicer">Slicer</string>
+    <string name="nav_files">Files</string>
+    <string name="nav_settings">Settings</string>
+    <string name="settings_title">⚙️  Settings</string>
+    <string name="settings_user">👤  User</string>
+    <string name="settings_change_name">✏️  Change Name</string>
+    <string name="settings_theme_color">🎨  App Color</string>
+    <string name="settings_unit">📏  Measurement Unit</string>
+    <string name="settings_quality">🎮  Render Quality</string>
+    <string name="settings_quality_high">🔥  High</string>
+    <string name="settings_quality_medium">⚡  Medium</string>
+    <string name="settings_quality_low">💨  Low</string>
+    <string name="settings_sound">🔊  Navigation Sound</string>
+    <string name="settings_anim">✨  Transition Animation</string>
+    <string name="settings_permissions">🔐  Permissions</string>
+    <string name="settings_file_access">📁  All Files Access</string>
+    <string name="settings_file_access_granted">✅  Granted — All Files Access</string>
+    <string name="settings_actions">🛠️  Actions</string>
+    <string name="settings_clear_history">🗑️  Clear File History</string>
+    <string name="intro_skip">Skip ⏭</string>
+    <string name="settings_about_video">🎬  Watch App Intro Video</string>
+    <string name="settings_show_reflection">Show reflection under model</string>
+    <string name="settings_show_reflection_desc">If off, a grid will show instead</string>
+    <string name="settings_face_count">Face/vertex counter</string>
+    <string name="settings_face_count_desc">Small text at the top of the viewer showing Faces/Vertices count</string>
+    <string name="settings_change_name">👤  Change Name</string>
+    <string name="settings_change_name_hint">Your new name</string>
+    <string name="settings_default_name">friend</string>
+    <string name="action_save">Save</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_clear">Clear</string>
+    <string name="settings_clear_history_title">🗑️ Clear History</string>
+    <string name="settings_clear_history_msg">Do you want to clear the entire file history?</string>
+    <string name="app_version_info">🎮  Amr3D Preview Pro
+Version 7.0
+Amr Hamam 3D © 2026</string>
+    <string name="greeting_with_name">Welcome %1$s 👋
+
+</string>
+    <string name="settings_contact_wa">💬  Contact via WhatsApp</string>
+    <string name="settings_language">🌐  Language</string>
+    <string name="settings_appearance">Appearance</string>
+    <string name="settings_viewer_section">Viewer</string>
+    <string name="settings_general">General</string>
+    <string name="history_empty">🕐\n\nNo history yet\nOpen an STL or DXF file to start</string>
+    <string name="history_title">🕐  Recently Opened</string>
+    <string name="file_not_found">⚠️ File not found</string>
+    <string name="loading_file">Opening file…</string>
+    <string name="loading_analyzing">Analyzing file…</string>
+    <string name="loading_preparing">Preparing render…</string>
+    <string name="loading_done">Done ✓</string>
+    <string name="dxf_mode">📐 DXF 2D Mode</string>
+    <string name="stl_mode">🧊 STL 3D Mode</string>
+
+    <string name="splash_touch_hint">TOUCH TO INTERACT</string>
+    <string name="history_clear">🗑️ Clear</string>
+    <string name="unit_mm_full">📏  Millimeter (mm)</string>
+    <string name="unit_cm_full">📏  Centimeter (cm)</string>
+    <string name="unit_inch_full">📐  Inch</string>
+    <string name="settings_quality_high_full">🔥  High (all triangles)</string>
+    <string name="settings_quality_medium_full">⚡  Medium (faster)</string>
+    <string name="settings_quality_low_full">💨  Low (for weaker devices)</string>
+    <string name="settings_sound_anim_header">🎵  Sound &amp; Animation</string>
+    <string name="slicer_header">Slicer</string>
+    <string name="slicer_wip">Under development 🚧</string>
+    <string name="slicer_wip_desc">Open an STL file from the Viewer first\nSlicing features coming soon</string>
+    <string name="dir_up">⬆ Up</string>
+    <string name="dir_left">◀ Left</string>
+    <string name="dir_front">Front</string>
+    <string name="dir_right">Right ▶</string>
+    <string name="dir_down">⬇ Down</string>
+    <string name="dir_back">↩ Back</string>
+    <string name="welcome_greeting">👋  Welcome, %1$s</string>
+    <string name="welcome_overlay">🎮  Welcome\n%1$s</string>
+    <string name="measure_first_point">First point selected — tap a second point</string>
+    <string name="toast_settings_open_failed">Couldn\'t open settings</string>
+    <string name="toast_some_folders_hidden">Some folders won\'t appear without permission</string>
+    <string name="toast_file_access_required">File access permission required</string>
+    <string name="toast_root_folder">You are in the root folder</string>
+    <string name="toast_cannot_access_folder">Can\'t access this folder</string>
+    <string name="toast_no_stl_dxf_here">No STL or DXF files here</string>
+    <string name="toast_error_prefix">Error: %1$s</string>
+    <string name="toast_saved_name">✅ Saved: %1$s</string>
+    <string name="toast_applies_next_file">Will apply when you open the next file</string>
+    <string name="toast_permission_already_granted">✅ Permission already granted</string>
+    <string name="toast_cleared">✅ Cleared</string>
+    <string name="toast_theme_applied">✅ %1$s\nWill fully apply after reopening the app</string>
+    <string name="toast_tap_two_points">Tap two points on the model</string>
+    <string name="toast_open_file_first">Open a file first</string>
+    <string name="toast_triangle_count">✅  %1$d triangles</string>
+    <string name="model_stats_overlay">Faces: %1$d\nVertices: %2$d</string>
+    <string name="toast_permission_error">Permission error — try again</string>
+    <string name="toast_file_read_error">Couldn\'t read file: %1$s</string>
+    <string name="toast_file_too_large">⚠️ File is too large for the available device memory. Try a smaller or less detailed file</string>
+
+    <string name="large_file_warning_title">⚠️ Large File</string>
+    <string name="large_file_warning_message">⚠️ This file is large (%1$s MB) — it may take longer to load and use more memory</string>
+    <string name="large_file_btn_continue">Continue</string>
+    <string name="large_file_btn_back">Back</string>
+    <string name="large_file_confirm_title">Confirm Loading</string>
+    <string name="large_file_simplify_message">OK. To keep things running smoothly, the model\'s resolution will be automatically simplified during display — the overall shape and dimensions stay exactly the same, only some very fine detail may be slightly reduced. Continue?</string>
+    <string name="large_file_confirm_message_generic">OK, would you like to continue loading the file?</string>
+    <string name="large_file_btn_agree">Agree</string>
+    <string name="large_file_btn_cancel">Cancel</string>
+
+    <string name="dialog_welcome_title">🎮  Welcome to Amr3D Preview</string>
+    <string name="dialog_welcome_message">What\'s your name?</string>
+    <string name="dialog_name_hint">Type your name here</string>
+    <string name="dialog_start_btn">Start</string>
+    <string name="default_friend_name">friend</string>
+    <string name="toast_no_point_selected">No point selected</string>
+    <string name="toast_save_failed">Couldn\'t save</string>
+    <string name="share_export_title">Export Image</string>
+    <string name="whatsapp_default_msg">Hi, I have a question about the Amr3D Preview app</string>
+    <string name="measure_distance_label">Distance: %1$.3f %2$s</string>
+    <string name="inspection_report_header">📐 Model Dimensions\n─────────────────</string>
+    <string name="inspection_width_label">Length (X):   %1$s %2$s</string>
+    <string name="inspection_depth_label">Width (Y):    %1$s %2$s</string>
+    <string name="inspection_height_label">Height (Z):   %1$s %2$s</string>
+
+    <string name="toast_entity_count">✅  %1$d entities</string>
+
+    <string name="loading_large_file_hint">⏳ This file looks relatively large, please wait a moment</string>
+
+    <string name="toast_dxf_distance">📏 Distance: %1$.2f %2$s</string>
+
+    <string name="error_dxf_open_failed">Could not open DXF file</string>
+    <string name="error_dxf_no_entities">ENTITIES section not found</string>
+    <string name="error_dxf_no_displayable">No displayable elements found in the DXF file</string>
+
+    <string name="error_stl_open_failed">Could not open file</string>
+    <string name="error_stl_empty">File is empty</string>
+    <string name="error_stl_too_large">File is too large (over 500 MB). Not supported</string>
+    <string name="error_stl_read_failed">Could not read file</string>
+    <string name="error_stl_binary_corrupt">Binary STL file is corrupted or incomplete</string>
+    <string name="error_stl_triangle_mismatch">Triangle count in file (%1$d) does not match file size — file may be corrupted</string>
+    <string name="error_stl_no_valid_triangles">File contains no valid triangles</string>
+    <string name="error_stl_corrupt_triangle">Corrupted STL file - cannot read triangle #%1$d</string>
+    <string name="error_stl_invalid_value">Invalid value in file at: %1$s</string>
+    <string name="error_stl_ascii_no_triangles">No valid triangles found in the ASCII STL file</string>
+
+    <string name="dialog_permission_title">🔐  File Access Permission</string>
+    <string name="dialog_permission_message">To display STL and DXF files from all folders on your device, the app needs \"All files access\" permission.\n\nThe settings page will open — enable the permission then return to the app.</string>
+    <string name="dialog_open_settings">Open Settings</string>
+    <string name="dialog_later">Later</string>
+
+    <string name="toast_waiting_second_point">Waiting for second measurement point</string>
+
+    <string name="dialog_clear_history_title">🗑️  Clear History</string>
+    <string name="dialog_clear_history_message">Clear the entire file history?</string>
+    <string name="dialog_clear">Clear</string>
+    <string name="dialog_cancel">Cancel</string>
+    <string name="history_file_missing">Not found</string>
+
+    <string name="unit_short_mm">mm</string>
+    <string name="unit_short_cm">cm</string>
+    <string name="unit_short_inch">in</string>
+
+    <string name="material_plastic">Plastic</string>
+    <string name="material_metal">Metal</string>
+    <string name="material_wood">Wood</string>
+    <string name="material_marble">Marble</string>
+    <string name="material_copper">Copper</string>
+    <string name="material_carbon">Carbon</string>
+    <string name="material_gold">Gold</string>
+    <string name="material_rubber">Rubber</string>
+
+    <string name="dialog_change_name_title">👤  Change Name</string>
+    <string name="hint_new_name">Your new name</string>
+    <string name="default_user_name">Friend</string>
+    <string name="dialog_save">Save</string>
+    <string name="whatsapp_inquiry_message">Hi, I have a question about the Amr3D Preview app</string>
+    <string name="permission_granted_all_files">✅  Enabled — All files access</string>
+    <string name="permission_request_all_files">📁  All files access permission</string>
+    <string name="about_greeting">Hello %1$s 👋\n\n</string>
+    <string name="about_app_info">%1$s🎮  Amr3D Preview Pro\nVersion 7.0\nAmr Hamam 3D © 2026</string>
+
+    <string name="bg_color_dark">Dark</string>
+    <string name="bg_color_black">Black</string>
+    <string name="bg_color_gray">Gray</string>
+    <string name="bg_color_white">White</string>
+    <string name="bg_color_navy">Navy</string>
+    <string name="dialog_choose_material_title">🎨  Choose Material</string>
+    <string name="section_background">Background</string>
+    <string name="files_search_hint">Search files...</string>
+    <string name="files_folder_item_count">%1$d items</string>
+    <string name="files_item_meta_format">%1$s  ·  %2$s</string>
+    <string name="settings_zup">Vertical axis: Z (3ds Max/CAD)</string>
+    <string name="settings_zup_sub">Enable for Z-up files — disable if the file is already Y-up</string>
+
+    <!-- DXF layers list -->
+    <string name="layers_tool">🗂️ Layers</string>
+    <string name="dialog_layers_title">Drawing Layers</string>
+    <string name="dxf_cut_length_summary">📏 Total cut length: %1$.1f mm (%2$d paths)</string>
+    <string name="dialog_close">Close</string>
+    <string name="rotate_tool_description">Auto Rotate</string>
+    <string name="layer_color_group">🎨 Color %1$d</string>
+
+    <!-- DXF background color button and picker -->
+    <string name="dxf_background_tool">🎨 Background Color</string>
+    <string name="bounding_box_tool_description">Bounding Box</string>
+
+    <!-- Light/Dark mode -->
+    <string name="settings_light_mode">☀️ Light Mode</string>
+    <string name="settings_light_mode_sub">White interface background instead of dark — the viewer picks a suitable color automatically</string>
+</resources>

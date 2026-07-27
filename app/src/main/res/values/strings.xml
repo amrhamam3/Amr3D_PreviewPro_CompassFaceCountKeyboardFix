@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Amr3D Preview Pro</string>
+    <string name="open_file">📂</string>
+    <string name="no_file_loaded">لا يوجد ملف محمّل\nاضغط 📂 لفتح ملف STL أو DXF</string>
+    <string name="measure_tool">📐 قياس</string>
+    <string name="inspect_tool">🔍</string>
+    <string name="reset_view">↺</string>
+    <string name="wireframe">🕸️ شبكي</string>
+    <string name="material">🎨</string>
+    <string name="export_image">📷 تصدير</string>
+    <string name="light">💡 ضوء</string>
+    <string name="directions">🧭</string>
+    <string name="unit_mm">📏</string>
+    <string name="nav_viewer">العارض</string>
+    <string name="nav_history">التاريخ</string>
+    <string name="nav_slicer">Slicer</string>
+    <string name="nav_files">الملفات</string>
+    <string name="nav_settings">الإعدادات</string>
+    <string name="settings_title">⚙️  الإعدادات</string>
+    <string name="settings_user">👤  المستخدم</string>
+    <string name="settings_change_name">✏️  تغيير الاسم</string>
+    <string name="settings_theme_color">🎨  لون التطبيق</string>
+    <string name="settings_unit">📏  وحدة القياس</string>
+    <string name="settings_quality">🎮  جودة العرض</string>
+    <string name="settings_quality_high">🔥  عالية</string>
+    <string name="settings_quality_medium">⚡  متوسطة</string>
+    <string name="settings_quality_low">💨  منخفضة</string>
+    <string name="settings_sound">🔊  صوت التنقل</string>
+    <string name="settings_anim">✨  انيميشن الانتقال</string>
+    <string name="settings_permissions">🔐  الأذونات</string>
+    <string name="settings_file_access">📁  إذن الوصول لكل الملفات</string>
+    <string name="settings_file_access_granted">✅  مفعّل — إذن كل الملفات</string>
+    <string name="settings_actions">🛠️  إجراءات</string>
+    <string name="settings_clear_history">🗑️  مسح سجل الملفات</string>
+    <string name="intro_skip">تخطي ⏭</string>
+    <string name="settings_about_video">🎬  شاهد فيديو التعريف بالتطبيق</string>
+    <string name="settings_show_reflection">إظهار الانعكاس تحت الموديل</string>
+    <string name="settings_show_reflection_desc">لو اتقفل، هتظهر شبكة (Grid) بدله</string>
+    <string name="settings_face_count">عداد المثلثات والرؤوس</string>
+    <string name="settings_face_count_desc">نص صغير أعلى شاشة العرض يوضح عدد Faces وVertices</string>
+    <string name="settings_change_name">👤  تغيير الاسم</string>
+    <string name="settings_change_name_hint">اسمك الجديد</string>
+    <string name="settings_default_name">صديقي</string>
+    <string name="action_save">حفظ</string>
+    <string name="action_cancel">إلغاء</string>
+    <string name="action_clear">مسح</string>
+    <string name="settings_clear_history_title">🗑️ مسح التاريخ</string>
+    <string name="settings_clear_history_msg">هل تريد مسح كل سجل الملفات؟</string>
+    <string name="app_version_info">🎮  Amr3D Preview Pro
+الإصدار 7.0
+Amr Hamam 3D © 2026</string>
+    <string name="greeting_with_name">مرحباً %1$s 👋
+
+</string>
+    <string name="settings_contact_wa">💬  تواصل عبر واتساب</string>
+    <string name="settings_language">🌐  اللغة</string>
+    <string name="settings_appearance">المظهر</string>
+    <string name="settings_viewer_section">العارض</string>
+    <string name="settings_general">عام</string>
+    <string name="history_empty">🕐\n\nلا يوجد تاريخ بعد\nافتح ملف STL أو DXF للبدء</string>
+    <string name="history_title">🕐  آخر الملفات المفتوحة</string>
+    <string name="file_not_found">⚠️ الملف غير موجود</string>
+    <string name="loading_file">جارٍ تحميل الملف...</string>
+    <string name="loading_analyzing">جارٍ تحليل الملف...</string>
+    <string name="loading_preparing">جارٍ التحضير للعرض...</string>
+    <string name="loading_done">اكتمل ✓</string>
+    <string name="dxf_mode">📐 وضع DXF ثنائي الأبعاد</string>
+    <string name="stl_mode">🧊 وضع STL ثلاثي الأبعاد</string>
+
+    <!-- السطرين اللي كانو ناقصين -->
+    <string name="toggle_dxf_view">التبديل لعرض DXF</string>
+    <string name="toggle_stl_view">التبديل لعرض STL</string>
+
+    <string name="splash_touch_hint">المس للتفاعل</string>
+    <string name="history_clear">🗑️ مسح</string>
+    <string name="unit_mm_full">📏  مليمتر (مم)</string>
+    <string name="unit_cm_full">📏  سنتيمتر (سم)</string>
+    <string name="unit_inch_full">📐  بوصة (inch)</string>
+    <string name="settings_quality_high_full">🔥  عالية (كل المثلثات)</string>
+    <string name="settings_quality_medium_full">⚡  متوسطة (أسرع)</string>
+    <string name="settings_quality_low_full">💨  منخفضة (للأجهزة الضعيفة)</string>
+    <string name="settings_sound_anim_header">🎵  الصوت والحركة</string>
+    <string name="slicer_header">Slicer</string>
+    <string name="slicer_wip">قيد التطوير 🚧</string>
+    <string name="slicer_wip_desc">افتح ملف STL من العارض أولاً\nسيتم إضافة ميزات التقطيع قريباً</string>
+    <string name="dir_up">⬆ أعلى</string>
+    <string name="dir_left">◀ يسار</string>
+    <string name="dir_front">الأمام</string>
+    <string name="dir_right">يمين ▶</string>
+    <string name="dir_down">⬇ أسفل</string>
+    <string name="dir_back">↩ خلف</string>
+    <string name="welcome_greeting">👋  مرحباً، %1$s</string>
+    <string name="welcome_overlay">🎮  أهلاً وسهلاً\n%1$s</string>
+    <string name="measure_first_point">نقطة أولى محددة — اضغط على نقطة ثانية</string>
+    <string name="toast_settings_open_failed">تعذر فتح الإعدادات</string>
+    <string name="toast_some_folders_hidden">بعض المجلدات لن تظهر بدون الإذن</string>
+    <string name="toast_file_access_required">يلزم إذن الوصول للملفات</string>
+    <string name="toast_root_folder">أنت في المجلد الجذر</string>
+    <string name="toast_cannot_access_folder">لا يمكن الوصول لهذا المجلد</string>
+    <string name="toast_no_stl_dxf_here">لا توجد ملفات STL أو DXF هنا</string>
+    <string name="toast_error_prefix">خطأ: %1$s</string>
+    <string name="toast_saved_name">✅ تم الحفظ: %1$s</string>
+    <string name="toast_applies_next_file">سيُطبَّق عند فتح الملف التالي</string>
+    <string name="toast_permission_already_granted">✅ الإذن مفعّل بالفعل</string>
+    <string name="toast_cleared">✅ تم المسح</string>
+    <string name="toast_theme_applied">✅ %1$s\nسيُطبَّق بالكامل عند إعادة فتح التطبيق</string>
+    <string name="toast_tap_two_points">اضغط على نقطتين على الموديل</string>
+    <string name="toast_open_file_first">افتح ملف أولاً</string>
+    <string name="toast_triangle_count">✅  %1$d مثلث</string>
+    <string name="model_stats_overlay">مثلثات: %1$d\nرؤوس: %2$d</string>
+    <string name="toast_permission_error">خطأ في الأذونات — حاول مرة أخرى</string>
+    <string name="toast_file_read_error">تعذر قراءة الملف: %1$s</string>
+    <string name="toast_file_too_large">⚠️ الملف كبير جدًا على ذاكرة الجهاز المتاحة. جرّب ملف أصغر أو أقل تفاصيل</string>
+
+    <string name="large_file_warning_title">⚠️ ملف كبير</string>
+    <string name="large_file_warning_message">⚠️ الملف كبير (%1$s ميجابايت) — ده ممكن ياخد وقت أطول ويستهلك ذاكرة أكتر</string>
+    <string name="large_file_btn_continue">استمرار</string>
+    <string name="large_file_btn_back">رجوع</string>
+    <string name="large_file_confirm_title">تأكيد التحميل</string>
+    <string name="large_file_simplify_message">تمام. عشان الأداء يفضل سلس، هيتم تبسيط دقة الموديل تلقائيًا أثناء العرض — الشكل العام للقطعة وأبعادها هيفضلوا زي ما هم بالظبط، وبس بعض التفاصيل الدقيقة جدًا ممكن تقل شوية. توافق تكمل؟</string>
+    <string name="large_file_confirm_message_generic">تمام، تحب تكمل تحميل الملف؟</string>
+    <string name="large_file_btn_agree">موافق</string>
+    <string name="large_file_btn_cancel">إلغاء</string>
+
+    <string name="dialog_welcome_title">🎮  مرحباً بك في Amr3D Preview</string>
+    <string name="dialog_welcome_message">ما اسمك؟</string>
+    <string name="dialog_name_hint">اكتب اسمك هنا</string>
+    <string name="dialog_start_btn">ابدأ</string>
+    <string name="default_friend_name">صديقي</string>
+    <string name="toast_no_point_selected">لم يتم تحديد نقطة</string>
+    <string name="toast_save_failed">تعذر الحفظ</string>
+    <string name="share_export_title">تصدير الصورة</string>
+    <string name="whatsapp_default_msg">مرحبًا، عندي استفسار بخصوص تطبيق Amr3D Preview</string>
+    <string name="measure_distance_label">المسافة: %1$.3f %2$s</string>
+    <string name="inspection_report_header">📐 أبعاد الموديل\n─────────────────</string>
+    <string name="inspection_width_label">الطول (X):    %1$s %2$s</string>
+    <string name="inspection_depth_label">العرض (Y):   %1$s %2$s</string>
+    <string name="inspection_height_label">الارتفاع (Z): %1$s %2$s</string>
+
+    <string name="toast_entity_count">✅  %1$d عنصر</string>
+
+    <string name="loading_large_file_hint">⏳ الملف يبدو كبيرًا نسبيًا، برجاء الانتظار قليلاً</string>
+
+    <string name="toast_dxf_distance">📏 المسافة: %1$.2f %2$s</string>
+
+    <string name="error_dxf_open_failed">تعذر فتح ملف DXF</string>
+    <string name="error_dxf_no_entities">لم يتم العثور على قسم ENTITIES</string>
+    <string name="error_dxf_no_displayable">لم يتم العثور على عناصر قابلة للعرض في ملف DXF</string>
+
+    <string name="error_stl_open_failed">تعذر فتح الملف</string>
+    <string name="error_stl_empty">الملف فارغ</string>
+    <string name="error_stl_too_large">حجم الملف كبير جداً (أكثر من 500 MB). الملف غير مدعوم</string>
+    <string name="error_stl_read_failed">تعذر قراءة الملف</string>
+    <string name="error_stl_binary_corrupt">ملف STL (Binary) تالف أو غير مكتمل</string>
+    <string name="error_stl_triangle_mismatch">عدد المثلثات في الملف (%1$d) لا يتطابق مع حجم الملف — الملف قد يكون تالفًا</string>
+    <string name="error_stl_no_valid_triangles">الملف لا يحتوي على أي مثلثات صالحة</string>
+    <string name="error_stl_corrupt_triangle">ملف STL تالف - لا يمكن قراءة المثلث رقم %1$d</string>
+    <string name="error_stl_invalid_value">قيمة غير صالحة في الملف عند: %1$s</string>
+    <string name="error_stl_ascii_no_triangles">لم يتم العثور على أي مثلثات صالحة في ملف الـ ASCII STL</string>
+
+    <string name="dialog_permission_title">🔐  إذن الوصول للملفات</string>
+    <string name="dialog_permission_message">لعرض ملفات STL و DXF من كل مجلدات جهازك، يحتاج التطبيق إذن \"الوصول لكل الملفات\".\n\nسيتم فتح صفحة الإعدادات — فعّل الإذن ثم ارجع للتطبيق.</string>
+    <string name="dialog_open_settings">فتح الإعدادات</string>
+    <string name="dialog_later">لاحقاً</string>
+
+    <string name="toast_waiting_second_point">منتظرين ثاني نقطة قياس</string>
+
+    <string name="dialog_clear_history_title">🗑️  مسح التاريخ</string>
+    <string name="dialog_clear_history_message">هل تريد مسح كل سجل الملفات؟</string>
+    <string name="dialog_clear">مسح</string>
+    <string name="dialog_cancel">إلغاء</string>
+    <string name="history_file_missing">غير موجود</string>
+
+    <string name="unit_short_mm">مم</string>
+    <string name="unit_short_cm">سم</string>
+    <string name="unit_short_inch">بوصة</string>
+
+    <string name="material_plastic">بلاستيك</string>
+    <string name="material_metal">معدن</string>
+    <string name="material_wood">خشب</string>
+    <string name="material_marble">رخام</string>
+    <string name="material_copper">نحاس</string>
+    <string name="material_carbon">كربون</string>
+    <string name="material_gold">ذهب</string>
+    <string name="material_rubber">مطاط</string>
+
+    <string name="dialog_change_name_title">👤  تغيير الاسم</string>
+    <string name="hint_new_name">اسمك الجديد</string>
+    <string name="default_user_name">صديقي</string>
+    <string name="dialog_save">حفظ</string>
+    <string name="whatsapp_inquiry_message">مرحبًا، عندي استفسار بخصوص تطبيق Amr3D Preview</string>
+    <string name="permission_granted_all_files">✅  مفعّل — إذن كل الملفات</string>
+    <string name="permission_request_all_files">📁  إذن الوصول لكل الملفات</string>
+    <string name="about_greeting">مرحباً %1$s 👋\n\n</string>
+    <string name="about_app_info">%1$s🎮  Amr3D Preview Pro\nالإصدار 7.0\nAmr Hamam 3D © 2026</string>
+
+    <string name="bg_color_dark">داكن</string>
+    <string name="bg_color_black">أسود</string>
+    <string name="bg_color_gray">رمادي</string>
+    <string name="bg_color_white">أبيض</string>
+    <string name="bg_color_navy">كحلي</string>
+    <string name="dialog_choose_material_title">🎨  اختر الخامة</string>
+    <string name="section_background">الخلفية</string>
+    <string name="files_search_hint">بحث في الملفات...</string>
+    <string name="files_folder_item_count">%1$d عنصر</string>
+    <string name="files_item_meta_format">%1$s  ·  %2$s</string>
+    <string name="settings_zup">المحور الرأسي: Z (3ds Max/CAD)</string>
+    <string name="settings_zup_sub">شغّله لملفات مصممة بمحور Z لأعلى — قفّله لو الملف Y لأعلى أصلاً</string>
+
+    <!-- قائمة طبقات DXF -->
+    <string name="layers_tool">🗂️ طبقات</string>
+    <string name="dialog_layers_title">طبقات الرسمة</string>
+    <string name="dxf_cut_length_summary">📏 إجمالي طول القطع: %1$.1f مم (%2$d مسار)</string>
+    <string name="dialog_close">إغلاق</string>
+    <string name="rotate_tool_description">تدوير تلقائي</string>
+    <string name="layer_color_group">🎨 لون %1$d</string>
+
+    <!-- زرار وقائمة لون خلفية عارض DXF -->
+    <string name="dxf_background_tool">🎨 لون الخلفية</string>
+    <string name="bounding_box_tool_description">صندوق الأبعاد</string>
+
+    <!-- الوضع الفاتح/الغامق -->
+    <string name="settings_light_mode">☀️ الوضع الفاتح</string>
+    <string name="settings_light_mode_sub">خلفية بيضا للواجهة بدل الغامقة — عارض الموديل بيفضل بلون مناسب تلقائيًا</string>
+</resources>

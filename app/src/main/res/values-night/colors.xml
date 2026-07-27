@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- اتغيّرت عشان تتطابق مع خلفية شاشة الترحيب (Splash) — كانت رمادي غامق (#15171C)
+         بقت كحلي/أسود قريب جدًا من لون الـ Splash نفسه (#020510) عشان التطبيق كله
+         ياخد نفس الروح البصرية. -->
+    <color name="background_dark">#05070c</color>
+    <!-- سطح البطاقات/العناصر البارزة — فاتح شوية عن background_dark عشان يفضل فيه
+         تمايز بصري بسيط بين الخلفية والعناصر فوقها، بس برضو كحلي غامق مش رمادي متوسط -->
+    <color name="surface_dark">#0d0f14</color>
+    <color name="accent_orange">#FF8A1E</color>
+    <color name="accent_blue">#73BFF2</color>
+    <color name="text_primary">#F2F3F5</color>
+    <color name="text_secondary">#9CA3AF</color>
+    <color name="warning_red">#E2574C</color>
+    <color name="success_green">#4CAF7D</color>
+
+    <!-- ألوان العناصر العائمة فوق عارض الموديل/DXF (زرار البوصلة، شريط التحميل، قرص
+         الاتجاهات) — دي تفضل غامقة نسبيًا في الوضع الغامق (زي ما كانت من الأول)،
+         وبتتحول لفاتحة في الوضع الفاتح (شوف values/colors.xml). -->
+    <color name="surface_overlay">#CC05070C</color>
+    <color name="compass_disc_center">#E60A0C12</color>
+    <color name="compass_disc_edge">#8C0A0C12</color>
+</resources>
